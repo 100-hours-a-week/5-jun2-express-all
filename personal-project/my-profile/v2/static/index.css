@@ -1,0 +1,106 @@
+/** font **/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+
+/** page **/
+body {
+    
+    background-color: #171D2E;
+    color: #ffffff;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/** profile**/
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.profile img {
+    border-radius: 10px;
+    width: 100x;
+    height: 100px;
+}
+
+.profile #name {
+    margin-top: 35px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.profile #description {
+    margin-top: -20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/** contact **/
+.contact {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    width: 240px;
+    gap: 20px;
+}
+
+/** external **/
+.external {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    width: 400px;
+}
+
+.external .external-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.external-btn a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+    color: #000000;
+}
+
+/** photo **/
+.photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.photo img {
+    border-radius: 10px;
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/** video **/
+.video {
+    margin: 25px 0 90px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.video iframe {
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+}
