@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <header>
+        <h1 id="title"><a href="/" style="text-decoration: none; color: black;">아무 말 대잔치</a></h1>
+    </header>
+    <main>
+        <div id="login-box">
+            <h2>로그인</h2>
+
+            <form id="login-form" action="./board-list.html" method="post">
+                <div id="email-box">
+                    <label for="email">이메일</label>
+                    <div class="input-box">
+                        <input type="text" id="email" name="email" placeholder="이메일을 입력하세요"/>
+                    </div>
+                </div>
+                <div id="pw-box">
+                    <label for="pw">비밀번호</label>
+                    <div class="input-box">
+                        <input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요">
+                    </div>
+                </div>
+                <span></span>
+            </form>
+
+            <!-- form 외부에 있더라도 js를 통해 추후에 연결 가능 -->
+            <div id="btns">
+                <button id="login-btn" type="submit">로그인</button>
+                <a id="signup-btn" href="/signup">회원가입</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>
