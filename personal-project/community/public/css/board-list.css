@@ -97,6 +97,11 @@ main {
     justify-content: center;
 }
 
+.link {
+    text-decoration: none;
+    color: black;
+}
+
 #board-container {
     display: flex;
     flex-direction: column;
@@ -196,9 +201,16 @@ main {
 
 .countings {
     display: flex;
-    justify-content: space-between;
-    width: 220px;
+    align-items: center;
+    width: auto;
+    gap: 10px;
     overflow: visible;
+}
+
+.time {
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 .countings span, .time span{

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/board-modify.css">
+    <link rel="stylesheet" href="/css/board-modify.css">
     <title>Board modify page</title>
 </head>
 <body>
@@ -16,7 +16,7 @@
         </div>
         <div id="user-profile-img">
             <a href="#" class="nav-menu">
-                <img class="profile-img" src="../resource/image/profile3.jpeg" />
+                <img class="profile-img" src="/resource/image/profile3.jpeg" />
             </a>
             <!-- drop-down -->
             <div class="dropdown-menu">
@@ -40,7 +40,7 @@
             <div id="title-form">
                 <label for="board-title">제목*</label>
                 <hr class="line" style="margin-top: 15px;">
-                <input type="text" name="board-title" id="board-title" value="제목 1" placeholder="제목을 입력해주세요. (최대 26글자)" maxlength="26" />
+                <input type="text" name="board-title" id="board-title" placeholder="제목을 입력해주세요. (최대 26글자)" maxlength="26" />
                 <hr class="line" size="margin-top: 5px">
             </div>
             <div id="content-form">
@@ -49,7 +49,7 @@
                 <textarea name="content" id="content" cols="30" rows="10" placeholder="내용을 입력해주세요.">무엇을 얘기할지 정말로다가 고민이 되네요? 심지어 피그마에 있는 글은 복붙이안되나봅니다??? 이거이거 직접 쓸생각하니까 정말이지 억장이 무너져요... 아무튼 저는 삶은 달걀이라고 생각합니다. 그럼 화이팅!</textarea>
                 <hr class="line" style="margin-bottom: 0;">
                 <div id="helper-text">
-                    <span>* helper text</span>
+                    <span></span>
                 </div>
             </div>
             <div id="img-form">
@@ -57,14 +57,16 @@
                 <div id="img-input-box">
                     <label id="img-input-btn" for="img-input">파일 선택</label>
                     <input id="img-input" type="file" accept="image/jpeg,.txt" " style="display: none;"/>
-                    <span>기존 파일 명</span>
+                    <span id="file-text"></span>
                 </div>
             </div>
             <div id="btn-form">
                 <!-- 실제로는 submit 버튼으로 만들어야 함 -->
-                <button type="button" onclick='location.href="/boards"'>수정하기</button>
+                <button type="button" id="submit-btn" disabled>수정하기</button>
             </div>
         </form>
     </main>
+
+    <script src="/js/board-modify.js"></script>
 </body>
 </html>

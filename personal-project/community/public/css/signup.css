@@ -194,11 +194,6 @@ main {
     background-color: #aca0eb;
 }
 
-#signup-btn:hover {
-    background-color: #9584e7;
-    cursor: pointer;
-}
-
 #login-btn {
     margin-top: 10px;
     font-weight: 400;

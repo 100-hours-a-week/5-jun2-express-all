@@ -130,6 +130,9 @@ main {
     font-size: 24px;
     margin: 0;
     padding-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #post-info-view {
@@ -139,16 +142,16 @@ main {
 
 #post-info {
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
     align-items: center;
-    width: 285px;
+    width: 310px;
 }
 
 .writer-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 125px;
+    width: auto;
+    gap: 20px;
 }
 
 #writer {
@@ -159,6 +162,7 @@ main {
 .time {
     font-weight: 400;
     font-size: 14px;
+    width: 130px;
 }
 
 .btns {
@@ -204,6 +208,11 @@ main {
     background-color: #D9D9D9;
 }
 
+#content-img > img {
+    width: 100%;
+    height: 100%;
+}
+
 #content-text {
     padding-top: 20px;
     width: 544px;
@@ -212,7 +221,7 @@ main {
 #content-text textarea {
     display: flex;
     width: 544px;
-    height: 200px;
+    height: auto;
     resize: none;
     border: none;
 
@@ -327,9 +336,9 @@ main {
 
 .reply-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 300px;
+    width: auto;
+    gap: 15px;
 }
 
 .reply-writer {

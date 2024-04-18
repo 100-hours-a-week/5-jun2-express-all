@@ -239,8 +239,3 @@ label {
     font-size: 14px;
     color: #FFFFFF;
 }
-
-#btn-form button:hover {
-    cursor: pointer;
-    background-color: #9584e7;
-}

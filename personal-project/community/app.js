@@ -16,7 +16,9 @@ const routes = [
     { path: '/board-modify', file: 'board-modify.html' },
     { path: '/board-write', file: 'board-write.html' },
     { path: '/user-modify', file: 'user-modify.html' },
-    { path: '/password-modify', file: 'password-modify.html' }
+    { path: '/password-modify', file: 'password-modify.html' },
+    { path: '/boards/:boardId', file: 'board-detail.html'},
+    { path: '/boards/:boardId/edit', file: 'board-modify.html'}
 ];
 
 routes.forEach(route => {
