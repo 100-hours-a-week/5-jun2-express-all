@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/board-write.css">
+    <title>Board write page</title>
+</head>
+<body>
+    <header>
+        <div id="back-btn">
+            <a id="left-arrow" href="/boards"><</a>
+        </div>
+        <div>
+            <h1 id="title"><a href="/" style="text-decoration: none; color: black;">아무 말 대잔치</a></h1>
+        </div>
+        <div id="user-profile-img">
+            <a href="#" class="nav-menu">
+                <img class="profile-img" src="../resource/image/profile3.jpeg" />
+            </a>
+            <!-- drop-down -->
+            <div class="dropdown-menu">
+                <div class="task-btns">
+                    <div class="task-btn">
+                        <a href="/user-modify">회원정보수정</a>
+                    </div>
+                    <div class="task-btn">
+                        <a href="/password-modify">비밀번호수정</a>
+                    </div>
+                    <div class="task-btn">
+                        <a href="/login">로그아웃</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h2 slot="padding-top: 10px">게시글 작성</h2>
+        <form id="container" method="post">
+            <div id="title-form">
+                <label for="board-title">제목*</label>
+                <hr class="line" style="margin-top: 15px;">
+                <input type="text" name="board-title" id="board-title" placeholder="제목을 입력해주세요. (최대 26글자)" maxlength="26" />
+                <hr class="line" style="margin-top: 5px;">
+            </div>
+            <div id="content-form">
+                <label for="content">내용*</label>
+                <hr class="line" style="margin-top: 15px;">
+                <textarea name="content" id="content" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+                <hr class="line" style="margin-bottom: 0;">
+                <div id="helper-text">
+                    <span id="content-helper"></span>
+                </div>
+            </div>
+            <div id="img-form">
+                <label>이미지</label>
+                <div id="img-input-box">
+                    <label id="img-input-btn" for="img-input">파일 선택</label>
+                    <input id="img-input" type="file" accept="image/jpeg,.txt" style="display: none;"/>
+                    <span id="file-text">파일을 선택해주세요.</span>
+                </div>
+            </div>
+            <div id="btn-form">
+                <!-- 실제로는 submit 버튼으로 만들어야 함 -->
+                <button id="submit-btn" type="button" disabled>완료</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="../js/board-write.js"></script>
+</body>
+</html>

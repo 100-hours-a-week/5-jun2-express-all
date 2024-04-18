@@ -1,0 +1,66 @@
+/** base setting **/
+@font-face {
+    font-family: "sagak";
+    src: url("../resource/font/sagak.ttf") format("truetype");
+}
+
+html {
+    width: 1920px;
+    height: 1080px;
+}
+
+body {
+    margin: 0;
+    background-color: #F4F5F7;
+}
+
+/** header **/
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 104px;
+    border-bottom: 1px solid black;
+}
+
+#title {
+    text-align: center;
+    font-family: 'sagak';
+    font-weight: 400;
+    font-size: 32px;
+}
+
+/** main **/
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 700px;
+    margin-top: 50px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 280px;
+    height: 50px;
+    border-radius: 50px;
+
+    font-weight: 500;
+    font-size: 27px;
+    font-family: 'sagak';
+    text-decoration: none;
+
+    color: black;
+    background-color: beige;
+    border: 1px solid black;
+}
