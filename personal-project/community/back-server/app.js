@@ -11,9 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 const userRouter = require('./routes/userRouter');
+const boardRouter = require('./routes/boardRouter');
 
 app.use("/users", userRouter);
+app.use("/boards", boardRouter);
 
+// check server connection
 app.get('/', (req, res) => {
     res.send("ok");
 })
