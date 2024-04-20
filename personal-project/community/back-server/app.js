@@ -1,9 +1,23 @@
 const express = require('express');
-const app = express();
-const port = 8080;
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-app.get("/", (req, res) => {
-    res.send("Hello World!!!!");
+const app = express();
+
+const PORT = 8080;
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+const userRouter = require('./routes/userRouter');
+
+app.use("/users", userRouter);
+
+app.get('/', (req, res) => {
+    res.send("ok");
 })
 
-app.listen(port, () => console.log(`App is listening on port ${port}`));
+app.listen(PORT, () => {
+    console.log(`Back end server is running on ${PORT}`);
+})
