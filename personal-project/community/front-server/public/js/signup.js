@@ -196,6 +196,25 @@ async function validateNickname() {
     writeHelperMessage(nicknameHelperText, message);
 }
 
+// 생성 날짜
+const getCreatedDate = () => {
+    const createdAt = new Date();
+
+    const year = createdAt.getFullYear();
+    const month = ('0' + (createdAt.getMonth() + 1)).slice(-2);
+    const day = ('0' + createdAt.getDate()).slice(-2);
+
+    const dateString = year + '-' + month  + '-' + day;
+
+    const hours = ('0' + createdAt.getHours()).slice(-2); 
+    const minutes = ('0' + createdAt.getMinutes()).slice(-2);
+    const seconds = ('0' + createdAt.getSeconds()).slice(-2); 
+
+    const timeString = hours + ':' + minutes  + ':' + seconds;
+
+    return dateString + ' ' + timeString;
+}
+
 // 유저 데이터 서버 전송
 const submitUserData = async (event) => {
     event.preventDefault();
@@ -203,12 +222,14 @@ const submitUserData = async (event) => {
     
     // 더미 프로필 사진
     const dummyProfileURL = 'http://profiles.com/profile/profile.jpg';
+    const date = getCreatedDate();
 
     const userFormData = {
         'profileUrl' : dummyProfileURL,
         'email' : emailInput.value,
         'password' : passwordInput.value,
-        'nickname' : nicknameInput.value
+        'nickname' : nicknameInput.value,
+        'createdAt' : date
     }
 
     const option = {
@@ -223,7 +244,9 @@ const submitUserData = async (event) => {
         ...option
     });
 
-    //location.replace('/login');
+    setTimeout(() => {
+        location.replace('/login');
+    }, 2000);
 }
 
 
