@@ -14,6 +14,7 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('pw');
 const passwordCheckInput = document.getElementById('pw-check');
 const nicknameInput = document.getElementById('nickname');
+const signupButton = document.getElementById('signup-btn');
 
 // Helper Text
 const profileHelperText = document.getElementById('profile-helper');
@@ -45,7 +46,7 @@ function setProfile(event) {
         console.log(`name: ${file.name}`);  // 업로드된 파일 이름
 
         fileReader.onload = (event) => {
-            console.log(event.target);  // 업로드된 파일 경로
+            console.log(`path: ${event.target.result}`);  // 업로드된 파일 경로
             image.setAttribute("src", event.target.result); // 파일 경로 지정
     
             // 만약 파일이 업로드됐다면 십자선 제거
@@ -195,9 +196,38 @@ async function validateNickname() {
     writeHelperMessage(nicknameHelperText, message);
 }
 
+// 유저 데이터 서버 전송
+const submitUserData = async (event) => {
+    event.preventDefault();
+    const COMMON_URL = 'http://localhost:8080';
+    
+    // 더미 프로필 사진
+    const dummyProfileURL = 'http://profiles.com/profile/profile.jpg';
+
+    const userFormData = {
+        'profileUrl' : dummyProfileURL,
+        'email' : emailInput.value,
+        'password' : passwordInput.value,
+        'nickname' : nicknameInput.value
+    }
+
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(userFormData)
+    }
+
+    const res = await fetch(`${COMMON_URL}/users/signup`, {
+        ...option
+    });
+
+    //location.replace('/login');
+}
+
 
 // 회원가입 버튼 활성화 조건
-const signupButton = document.getElementById('signup-btn');
 async function validate(infoType, info) {
     if (infoType == "profile") {
         let image = document.getElementById("profile-img");
@@ -238,6 +268,7 @@ const validateUserInfo = async (userInfo) => {
     return true;
 }
 
+// 회원가입 버튼 활성화
 async function activeSignupButton() {
     const userInfo = {
         "profile" : profileInput.value,
@@ -253,12 +284,6 @@ async function activeSignupButton() {
         signupButton.disabled = false;
         signupButton.style.cursor = "pointer";
         signupButton.style.backgroundColor = " #7F6AEE";
-
-        signupButton.addEventListener('click', () => {
-            setTimeout(() => {
-                window.location.href = '/boards'
-            }, 2000);
-        });
     } else {
         signupButton.disabled = true;
         signupButton.style.cursor = "default";
@@ -283,3 +308,4 @@ passwordInput.addEventListener('keyup', activeSignupButton);
 passwordCheckInput.addEventListener('keyup', activeSignupButton);
 nicknameInput.addEventListener('keyup', activeSignupButton);
 
+signupButton.addEventListener('click', submitUserData);

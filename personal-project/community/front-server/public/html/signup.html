@@ -19,7 +19,7 @@
     <main>
         <div id="signup-box">
             <h2>회원가입</h2>
-            <form id="signup-form" action="/signup" enctype="multipart/form-data" method="post">
+            <form id="signup-form" action="http:/localhost:8080/users/signup" enctype="multipart/form-data" method="post">
                 <div id="profile-img-box">
                     <div>
                         <label class="text">프로필 사진</label><br>
@@ -63,8 +63,7 @@
                 </div>
             </form>
             <div id="btns">
-                <!-- 나중에 JS 로 연결하기 -->
-                <button id="signup-btn" disabled type="submit">회원가입</button>
+                <button form="signup-form" id="signup-btn" disabled type="submit">회원가입</button>
                 <a id="login-btn" href="/login">로그인하러 가기</a>
             </div>
         </div>
