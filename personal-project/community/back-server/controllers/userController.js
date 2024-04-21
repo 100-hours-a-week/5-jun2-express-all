@@ -1,7 +1,7 @@
 const userRepository = require('../models/userRepository');
 
 // 응답 메시지 
-const getResponseMessage = async (message, data) => {
+const getResponseMessage = (message, data) => {
     const response = {
         message, 
         data
@@ -25,20 +25,21 @@ function generateRandomString(length) {
 
 // 회원가입
 exports.signupUser = async (req, res, next) => {
-    console.log('유저 회원가입!');
-
     const { profileUrl, email, password, nickname, createdAt } = req.body;
     const user = { profileUrl, email, password, nickname, createdAt };
 
     try {
         const findUser = await userRepository.save(user);
-        const response = await getResponseMessage('signup_success', findUser);
+        const response = getResponseMessage('signup_success', findUser);
 
-        console.log(findUser);
+        console.log(response);
 
         return res.json(response);
     } catch (error) {
-        return res.status(500).json(error);
+        if (error.message === 'email_exist' || error.message === 'nickname_exist') {
+            return res.status(409).json({ message: error.message });
+        }
+        return res.status(500).json({ message: 'interval_server_error' });
     }
 }
 
@@ -50,14 +51,22 @@ exports.loginUser = async (req, res, next) => {
     try {
         const findUser = await userRepository.findUserByEmailAndPassword(userData);
 
-        // 인증 로직 들어가야 함
+        // 인증 로직 대신 랜덤 토큰 부여
         const randomToken = generateRandomString(Math.floor(Math.random() * 11) + 40);
         findUser.token = randomToken;
 
-        const response = await getResponseMessage('login_success', findUser);
+        const response = getResponseMessage('login_success', findUser);
+
+        console.log(response);
         return res.json(response);
     } catch (error) {
-        return res.status(500).json(error);
+        if (error.message === 'user_not_found') {
+            return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+        } else if (error.message === 'invalid_request') {
+            return res.status(400).json({ message: '올바르지 않은 요청입니다.' });
+        } else {
+            return res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+        }
     }
 }
 
