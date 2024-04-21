@@ -60,6 +60,7 @@ const generateBoard = (element) => {
     `;
 }
 
+// 더미 데이터 불러오는 로직
 const generateBoardFromData = async () => {
     try {
         const response = await fetch(dataURL);
@@ -80,9 +81,42 @@ const generateBoardFromData = async () => {
     }
 }
 
+// 서버에서 데이터 불러오는 로직
+const generateBoardFromServer = async () => {
+    const COMMON_URL = 'http://localhost:8080';
+    try {
+        console.log("=== 데이터 받기 시작 ===");
+
+        const option = {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }
+
+        const response = await fetch(`${COMMON_URL}/boards`, {
+            ...option
+        });
+        const json = await response.json();
+        const boards = json.data;
+
+        console.log(boards);
+
+        let html = '';
+        boards.forEach(board => {
+            html += generateBoard(board);
+        })
+
+        return html;
+    } catch (error) {
+        console.error('template error!', error);
+        throw error;
+    }
+}
+
 const displayHTML = async () => {
     try {
-        const html = await generateBoardFromData();
+        const html = await generateBoardFromServer();
         document.getElementById('content-box').innerHTML = html;
     } catch (error) {
         console.error('Data fetching error:', error);
