@@ -61,11 +61,11 @@ exports.loginUser = async (req, res, next) => {
         return res.json(response);
     } catch (error) {
         if (error.message === 'user_not_found') {
-            return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+            return res.status(404).json({ message: error.message });
         } else if (error.message === 'invalid_request') {
-            return res.status(400).json({ message: '올바르지 않은 요청입니다.' });
+            return res.status(400).json({ message: error.message });
         } else {
-            return res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+            return res.status(500).json({ message: 'interval_server_error' });
         }
     }
 }

@@ -48,7 +48,7 @@ exports.save = async (req) => {
 // 로그인
 exports.findUserByEmailAndPassword = async (req) => {
     return new Promise((resolve, reject) => {
-        const findUser = users.find(user => user.email === req.email && user.password === req.password);
+        const findUser = users.find(user => user.email === req['email'] && user['password'] === req.password);
 
         if (findUser) {
             const loginInfo = {
@@ -58,7 +58,7 @@ exports.findUserByEmailAndPassword = async (req) => {
             }
             resolve(loginInfo);
         } else {
-            reject(new Error('user_not_found'));
+            throw new Error('user_not_found');
         }  
     });
 }
