@@ -10,17 +10,15 @@ router.post("/signup", userController.signupUser);
 router.post("/login", userController.loginUser);
 
 // 로그아웃
+router.post("/logout", userController.logoutUser);
 
 // 회원 정보 수정
+router.post("/users/me", userController.updateUser);
 
 // 비밀번호 수정
+router.post("/users/password", userController.updatePassword);
 
 // 회원 탈퇴
-
-router.get("/:id", userController.findUserById);
-
-router.delete("/", (req, res, next) => {
-    res.json({"message" : "DELETE request to the test page"});
-})
+router.delete("/users/me", userController.deleteUser);
 
 module.exports = router;

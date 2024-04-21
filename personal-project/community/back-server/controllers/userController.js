@@ -57,7 +57,9 @@ exports.loginUser = async (req, res, next) => {
 
         const response = getResponseMessage('login_success', findUser);
 
+        // 데이터 출력
         console.log(response);
+
         return res.json(response);
     } catch (error) {
         if (error.message === 'user_not_found') {
@@ -71,12 +73,24 @@ exports.loginUser = async (req, res, next) => {
 }
 
 // 로그아웃
+exports.logoutUser = async (req, res, next) => {
+
+}
 
 // 회원 정보 수정
+exports.updateUser = async (req, res, next) => {
+    
+}
 
 // 비밀번호 수정
+exports.updatePassword = async (req, res, next) => {
+    
+}
 
 // 회원 탈퇴
+exports.deleteUser = async (req, res, next) => {
+    
+}
 
 exports.findUserById = async (req, res, next) => {
     const userId = req.params.id;

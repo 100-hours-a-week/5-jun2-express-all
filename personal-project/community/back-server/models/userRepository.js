@@ -1,14 +1,15 @@
+// 실제론 DB와 연결해야 함
 const users = [];
 let id = 0;
 
 // 이메일 중복 검사
 const isDuplicatedEmail = (email) => {
-    return users.some(user => user["email"] == email);
+    return users.some(user => user['email'] == email);
 }
 
 // 닉네임 중복 검사
 const isDuplicatedNickname = (nickname) => {
-    return users.some(user => user["nickname"] == nickname);
+    return users.some(user => user['nickname'] == nickname);
 }
 
 const validateUser = (req) => {
