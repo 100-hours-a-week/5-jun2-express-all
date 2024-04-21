@@ -17,25 +17,6 @@ function showFileName() {
     }
 }
 
-// 생성 날짜
-const getCreatedDate = () => {
-    const createdAt = new Date();
-
-    const year = createdAt.getFullYear();
-    const month = ('0' + (createdAt.getMonth() + 1)).slice(-2);
-    const day = ('0' + createdAt.getDate()).slice(-2);
-
-    const dateString = year + '-' + month  + '-' + day;
-
-    const hours = ('0' + createdAt.getHours()).slice(-2); 
-    const minutes = ('0' + createdAt.getMinutes()).slice(-2);
-    const seconds = ('0' + createdAt.getSeconds()).slice(-2); 
-
-    const timeString = hours + ':' + minutes  + ':' + seconds;
-
-    return dateString + ' ' + timeString;
-}
-
 // 게시글 데이터 서버 전송
 const submitBoardData = async (event) => {
     event.preventDefault();
@@ -43,15 +24,11 @@ const submitBoardData = async (event) => {
     
     // 더미 프로필 사진
     const dummyImageURL = 'https://i.namu.wiki/i/w11dbZZeomJI4bD3_KItw3vq7tgglcM1YQA_xHULxMsixPpY1S7KcB8WrEFhJNuSuejiiQkicGKMH12JvpUqBQ.webp';
-    const createdDate = getCreatedDate();
-    const updatedDate = getCreatedDate();
 
     const boardFormData = {
         'title': titleInput.value,
         'content': contentInput.value,
         'image_url': dummyImageURL,
-        'created_at': createdDate,
-        'updated_at': updatedDate
     }
 
     const option = {
@@ -66,9 +43,14 @@ const submitBoardData = async (event) => {
         ...option
     });
 
-    setTimeout(() => {
-        location.replace('/boards');
-    }, 2000);
+    const json = await res.json();
+    if (res.status == 200 || res.status == 201) {
+        setTimeout(() => {
+            location.replace('/boards');
+        }, 1000);
+    } else {
+        alert(json.message);
+    }
 }
 
 function activeSubmitButton() {
