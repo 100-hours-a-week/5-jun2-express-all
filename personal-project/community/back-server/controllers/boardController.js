@@ -78,17 +78,42 @@ exports.registerBoard = async (req, res, next) => {
 
 // 게시글 목록 조회
 exports.findAllBoards = async (req, res, next) => {
-    const boards = boardRepository.findAll();
-    const response = getResponseMessage('success', boards);
-    return res.status(200).json(response);
+    try {
+        const boards = boardRepository.findAll();
+        const response = getResponseMessage('success', boards);
+
+        return res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({ 'message': error.message });
+    }
 }
 
 // 게시글 상세 조회
 exports.findByBoardId = async (req, res, next) => {
-    const boardId = req.params.boardId;
-    const findBoard = boardRepository.findByBoardId(boardId);
-    const response = getResponseMessage('success', findBoard);
-    return res.status(200).json(response);
+    try {   
+        const boardId = req.params.boardId;
+
+        if (!isNaN(boardId)) {
+            throw new Error('invalid_request');
+        }
+
+        const findBoard = boardRepository.findByBoardId(boardId);
+
+        if (findBoard == null || findBoard == undefined) {
+            throw new Error('board_not_exist');
+        }
+
+        const response = getResponseMessage('success', findBoard);
+        return res.status(200).json(response);
+    } catch (error) {
+        if (error.message == 'invalid_request') {
+            return res.status(400).json({ 'message': error.message });
+        }
+        if (error.message == 'board_not_exist') {
+            return res.status(404).json({ 'message': error.message });
+        }
+        return res.status(500).json({ 'message': error.message });
+    }
 }
 
 // 게시글 수정
