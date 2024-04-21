@@ -23,21 +23,39 @@ function generateRandomString(length) {
     return result;
 }
 
+// 인자값 유효성 검사
+const validateRequest = (req) => {
+    for (const key in req) {
+        if (req.hasOwnProperty(key)) {
+            // 만약 값이 null 또는 undefined라면 에러 발생
+            if (req[key] === null || req[key] === undefined) {
+                throw new Error('invalid_request');
+            }
+        }
+    }
+}
+
 // 회원가입
 exports.signupUser = async (req, res, next) => {
-    const { profileUrl, email, password, nickname, createdAt } = req.body;
-    const user = { profileUrl, email, password, nickname, createdAt };
-
     try {
+        const { profileUrl, email, password, nickname, createdAt } = req.body;
+        const user = { profileUrl, email, password, nickname, createdAt };
+
+        // 요청 값이 비어있는지 확인
+        validateRequest(user);
+
         const findUser = await userRepository.save(user);
         const response = getResponseMessage('signup_success', findUser);
 
         console.log(response);
 
-        return res.json(response);
+        return res.status(200).json(response);
     } catch (error) {
         if (error.message === 'email_exist' || error.message === 'nickname_exist') {
             return res.status(409).json({ message: error.message });
+        }
+        if (error.message === 'invalid_request') {
+            return res.status(400).json({ message: error.message });
         }
         return res.status(500).json({ message: 'interval_server_error' });
     }
@@ -67,7 +85,7 @@ exports.loginUser = async (req, res, next) => {
         } else if (error.message === 'invalid_request') {
             return res.status(400).json({ message: error.message });
         } else {
-            return res.status(500).json({ message: 'interval_server_error' });
+            return res.status(500).json({ message: 'internal_server_error' });
         }
     }
 }
