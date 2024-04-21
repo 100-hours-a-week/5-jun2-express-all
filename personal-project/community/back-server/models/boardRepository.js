@@ -214,29 +214,24 @@ exports.findAll = () => {
 
 // 게시글 상세 조회
 exports.findById = (boardId) => {
-    // const boardIndex = boards.findIndex(board => board.board_id === newBoard.board_id);
+    const findBoard = boards.find(board => board['board_id'] == boardId);
 
-    // if (!isNaN(boardId)) {
-    //     throw new Error('invalid_request');
-    // }
-    // if (boardIndex === -1) {
-    //     throw new Error('board_not_exist');
-    // }
+    // 숫자가 아닌 경우 예외 처리 로직 필요
+    
+    // 존재하지 않는 게시글인 경우 
+    if (findBoard === null || findBoard === undefined) {
+        throw new Error('board_not_exist');
+    }
 
-    return boards.find(board => board['board_id'] == boardId);
+    return findBoard;
 }
 
 // 게시글 수정
 exports.updateBoard = (newBoard) => {
     const boardId = newBoard.board_id;
 
-    // 요청 유효성 검사
-    const boardIndex = boards.findIndex(board => board.board_id === newBoard.board_id);
-
-    if (!isNaN(boardId)) {
-        throw new Error('invalid_request');
-    }
-    if (boardIndex === -1) {
+    // 존재하지 않는 게시글인 경우 
+    if (findBoard === null || findBoard === undefined) {
         throw new Error('board_not_exist');
     }
 
