@@ -42,7 +42,7 @@ exports.save = async (req) => {
         users.push(user);
         return user;
     } catch (error) {
-        throw error; // 발생한 오류를 다시 던짐
+        throw error;
     }
 }
 

@@ -51,11 +51,11 @@ exports.signupUser = async (req, res, next) => {
 
         return res.status(200).json(response);
     } catch (error) {
-        if (error.message === 'email_exist' || error.message === 'nickname_exist') {
-            return res.status(409).json({ message: error.message });
-        }
         if (error.message === 'invalid_request') {
             return res.status(400).json({ message: error.message });
+        }
+        if (error.message === 'email_exist' || error.message === 'nickname_exist') {
+            return res.status(409).json({ message: error.message });
         }
         return res.status(500).json({ message: 'interval_server_error' });
     }
@@ -63,10 +63,12 @@ exports.signupUser = async (req, res, next) => {
 
 // 로그인
 exports.loginUser = async (req, res, next) => {
-    const { email, password } = req.body;
-    const userData = { email, password };
-
     try {
+        const { email, password } = req.body;
+        const userData = { email, password };
+
+        validate(user);
+
         const findUser = await userRepository.findUserByEmailAndPassword(userData);
 
         // 인증 로직 대신 랜덤 토큰 부여
@@ -78,15 +80,15 @@ exports.loginUser = async (req, res, next) => {
         // 데이터 출력
         console.log(response);
 
-        return res.json(response);
+        return res.status(200).json(response);
     } catch (error) {
+        if (error.message === 'invalid_request') {
+            return res.status(400).json({ message: error.message });
+        }
         if (error.message === 'user_not_found') {
             return res.status(404).json({ message: error.message });
-        } else if (error.message === 'invalid_request') {
-            return res.status(400).json({ message: error.message });
-        } else {
-            return res.status(500).json({ message: 'internal_server_error' });
-        }
+        } 
+        return res.status(500).json({ message: 'internal_server_error' });
     }
 }
 
