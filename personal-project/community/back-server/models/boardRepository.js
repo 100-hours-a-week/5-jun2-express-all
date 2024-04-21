@@ -145,7 +145,7 @@ const boards =  [
         "writer_profile_url": "../resource/image/jaeyong.jpeg",
         "writer_name": "째용이형",
         "created_at": "2024-01-01T20:22:56",
-        "image_url" : "https://images.com/images/image.jpg",
+        "image_url" : "../resource/image/youtube.png",
         "content" : "아니 잡스형 나 샤라웃 먼데ㅋㅋ 진짜 콜라보할 생각 있는거야? 사실 나도 앱등이라 이번에 맥북 하나 장만하려고 하는데 추천좀 해줘봐라",
         "likes_count": 1302,
         "comments_count": 2125,
