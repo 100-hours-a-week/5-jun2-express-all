@@ -213,6 +213,10 @@ exports.findAll = () => {
 }
 
 // 게시글 상세 조회
+exports.findByBoardId = (boardId) => {
+    const findBoard = boards.find(board => board['board_id'] == boardId);
+    return findBoard;
+}
 
 // 게시글 수정
 

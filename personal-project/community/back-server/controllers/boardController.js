@@ -85,7 +85,10 @@ exports.findAllBoards = async (req, res, next) => {
 
 // 게시글 상세 조회
 exports.findByBoardId = async (req, res, next) => {
-    
+    const boardId = req.params.boardId;
+    const findBoard = boardRepository.findByBoardId(boardId);
+    const response = getResponseMessage('success', findBoard);
+    return res.status(200).json(response);
 }
 
 // 게시글 수정
