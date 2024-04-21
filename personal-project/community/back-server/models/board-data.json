@@ -9,6 +9,7 @@
             "created_at": "2024-04-15T12:24:34",
             "image_url" : "../resource/image/spacex.jpeg",
             "content" : "됐고 그 나 조만간 심심해서 로켙-트 하나 쏠라니까 심심하면 구경와라 ㅋㅋ 위치는 안알려줄거긴 한데 그냥 알아서 찾아오셈 한 번에 공개하면 재미 없으니까",
+            "likes_count": 21,
             "views_count": 99,
 			"comments_count": 33,
             "comments" : [
@@ -43,6 +44,7 @@
             "created_at": "2024-04-10T09:08:12",
             "image_url" : "../resource/image/steveG.jpeg",
             "content" : "야 이거 써보니까 좋더라. 나랑 콜라보할 생각 있는지 좀 궁금하네ㅋㅋㅋ 사실 내가 일부러 가격 높게 잡긴 했는데 이걸 따라오네 진짜 미치겠다. 이거 보고 찔리면 댓글 달아라.",
+            "likes_count": 14004,
             "views_count": 330235,
 			"comments_count": 2452,
             "comments" : [
@@ -71,14 +73,15 @@
         },
         {
             "board_id": 3,
-			"title": "아 제목 뭐로 할지 정말 고민이다ㅋㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋ",
-            "writer_profile_url": "../resource/image/musk.jpeg",
-            "writer_name": "일론 머스크",
+			"title": "깻잎으로 딱밤 때리기",
+            "writer_profile_url": "../resource/image/profile2.jpeg",
+            "writer_name": "무지",
             "created_at": "2024-04-15T12:24:34",
             "image_url" : "https://images.com/images/image.jpg",
             "content" : "무엇을 얘기할까요? 아무말이라면, 삶은 달걀입니다.",
-            "views_count": 99,
-			"comments_count": 33,
+            "likes_count": 12,
+            "comments_count": 7,
+            "views_count": 49,
             "comments" : [
                 {
                     "comment_id" : 1,
@@ -111,8 +114,9 @@
             "created_at": "2024-04-15T12:24:34",
             "image_url" : "https://images.com/images/image.jpg",
             "content" : "무엇을 얘기할까요? 아무말이라면, 삶은 달걀입니다.",
-            "views_count": 99,
-			"comments_count": 33,
+            "likes_count": 532,
+            "comments_count": 105,
+            "views_count": 788,
             "comments" : [
                 {
                     "comment_id" : 1,
@@ -145,42 +149,9 @@
             "created_at": "2024-04-15T12:24:34",
             "image_url" : "https://images.com/images/image.jpg",
             "content" : "무엇을 얘기할까요? 아무말이라면, 삶은 달걀입니다.",
-            "views_count": 99,
-			"comments_count": 33,
-            "comments" : [
-                {
-                    "comment_id" : 1,
-                    "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                    "comment_writer_name" : "더미 댓글 작성자 1",
-                    "comment_content" : "댓글 내용 1",
-                    "created_at" : "2021-01-02T00:00:00"
-                },
-                {
-                    "comment_id" : 2,
-                    "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                    "comment_writer_name" : "더미 댓글 작성자 2",
-                    "comment_content" : "댓글 내용 2",
-                    "created_at" : "2021-01-02T00:00:00"
-                },
-                {
-                    "comment_id" : 3,
-                    "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                    "comment_writer_name" : "더미 댓글 작성자 3",
-                    "comment_content" : "댓글 내용 3",
-                    "created_at" : "2021-01-02T00:00:00"
-                }
-            ]
-        },
-        {
-            "board_id": 6,
-			"title": "아 제목 뭐로 할지 정말 고민이다ㅋㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋ",
-            "writer_profile_url": "../resource/image/musk.jpeg",
-            "writer_name": "일론 머스크",
-            "created_at": "2024-04-15T12:24:34",
-            "image_url" : "https://images.com/images/image.jpg",
-            "content" : "무엇을 얘기할까요? 아무말이라면, 삶은 달걀입니다.",
-            "views_count": 99,
-			"comments_count": 33,
+            "likes_count": 1302,
+            "comments_count": 2125,
+            "views_count": 40105,
             "comments" : [
                 {
                     "comment_id" : 1,

@@ -35,10 +35,30 @@ const validateRequest = (req) => {
     }
 }
 
+// 생성 날짜
+const getCreatedDate = () => {
+    const createdAt = new Date();
+
+    const year = createdAt.getFullYear();
+    const month = ('0' + (createdAt.getMonth() + 1)).slice(-2);
+    const day = ('0' + createdAt.getDate()).slice(-2);
+
+    const dateString = year + '-' + month  + '-' + day;
+
+    const hours = ('0' + createdAt.getHours()).slice(-2); 
+    const minutes = ('0' + createdAt.getMinutes()).slice(-2);
+    const seconds = ('0' + createdAt.getSeconds()).slice(-2); 
+
+    const timeString = hours + ':' + minutes  + ':' + seconds;
+
+    return dateString + ' ' + timeString;
+}
+
 // 회원가입
 exports.signupUser = async (req, res, next) => {
     try {
-        const { profileUrl, email, password, nickname, createdAt } = req.body;
+        const { profileUrl, email, password, nickname } = req.body;
+        const createdAt = getCreatedDate();
         const user = { profileUrl, email, password, nickname, createdAt };
 
         // 요청 값이 비어있는지 확인

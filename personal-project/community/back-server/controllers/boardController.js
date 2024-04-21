@@ -22,21 +22,46 @@ const validateRequest = (req) => {
     }
 }
 
+// 생성 날짜
+const getNowDate = () => {
+    const createdAt = new Date();
+
+    const year = createdAt.getFullYear();
+    const month = ('0' + (createdAt.getMonth() + 1)).slice(-2);
+    const day = ('0' + createdAt.getDate()).slice(-2);
+
+    const dateString = year + '-' + month  + '-' + day;
+
+    const hours = ('0' + createdAt.getHours()).slice(-2); 
+    const minutes = ('0' + createdAt.getMinutes()).slice(-2);
+    const seconds = ('0' + createdAt.getSeconds()).slice(-2); 
+
+    const timeString = hours + ':' + minutes  + ':' + seconds;
+
+    return dateString + ' ' + timeString;
+}
+
 /* 2) 주요 로직 */
 
 // 게시글 등록
 exports.registerBoard = async (req, res, next) => {
     try {
-        const { title, content, imageUrl } = req.body;
-        const board = { title, content, imageUrl };
+        const { title, content, image_url } = req.body;
+        const created_at = getNowDate();
+        const updated_at = getNowDate();
+        const board = { title, content, image_url, created_at, updated_at };
 
         validateRequest(board);
 
         console.log(board);
 
         const findBoard = await boardRepository.save(board);
-        const response = getResponseMessage('signup_success', findBoard);
+        const response = getResponseMessage('register_success', findBoard);
 
+        // console.log("=== 모든 게시글 조회 ===");
+        // console.log(boardRepository.findAll());
+        // console.log("=== 게시글 조회 끝 ===\n");
+        
         return res.status(201).json(response);
     } catch (error) {
         if (error.message == 'invalid_request') {
@@ -46,7 +71,7 @@ exports.registerBoard = async (req, res, next) => {
         // 인증되지 않은 사용자 요청인 경우 : 401
         // 권한이 없는 사용자 요청인 경우 : 403
         // 존재하지 않은 사용자 요청인 경우 : 404
-        
+
         return res.status(500).json({ message: error.messsage });
     }
 }
