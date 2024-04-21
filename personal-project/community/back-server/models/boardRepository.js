@@ -213,11 +213,39 @@ exports.findAll = () => {
 }
 
 // 게시글 상세 조회
-exports.findByBoardId = (boardId) => {
-    const findBoard = boards.find(board => board['board_id'] == boardId);
-    return findBoard;
+exports.findById = (boardId) => {
+    // const boardIndex = boards.findIndex(board => board.board_id === newBoard.board_id);
+
+    // if (!isNaN(boardId)) {
+    //     throw new Error('invalid_request');
+    // }
+    // if (boardIndex === -1) {
+    //     throw new Error('board_not_exist');
+    // }
+
+    return boards.find(board => board['board_id'] == boardId);
 }
 
 // 게시글 수정
+exports.updateBoard = (newBoard) => {
+    const boardId = newBoard.board_id;
+
+    // 요청 유효성 검사
+    const boardIndex = boards.findIndex(board => board.board_id === newBoard.board_id);
+
+    if (!isNaN(boardId)) {
+        throw new Error('invalid_request');
+    }
+    if (boardIndex === -1) {
+        throw new Error('board_not_exist');
+    }
+
+    // 수정
+    boards[boardIndex].title = newBoard.title;
+    boards[boardIndex].content = newBoard.content;
+    boards[boardIndex].image_url = newBoard.image_url;
+
+    return boards[boardIndex];
+}
 
 // 게시글 삭제

@@ -93,15 +93,7 @@ exports.findByBoardId = async (req, res, next) => {
     try {   
         const boardId = req.params.boardId;
 
-        if (!isNaN(boardId)) {
-            throw new Error('invalid_request');
-        }
-
-        const findBoard = boardRepository.findByBoardId(boardId);
-
-        if (findBoard == null || findBoard == undefined) {
-            throw new Error('board_not_exist');
-        }
+        const findBoard = boardRepository.findById(boardId);
 
         const response = getResponseMessage('success', findBoard);
         return res.status(200).json(response);
@@ -118,6 +110,19 @@ exports.findByBoardId = async (req, res, next) => {
 
 // 게시글 수정
 exports.updateBoard = async (req, res, next) => {
+    try {
+        const board_id = req.params.boardId;
+        const { title, content, image_url } = req.body;
+        const newBoardData = { board_id, title, content, image_url };
+
+        const updatedBoard = boardRepository.updateBoard(newBoardData);
+        const response = getResponseMessage('update_success', updatedBoard);
+
+        return res.status(200).json(response);
+
+    } catch (error) {
+
+    }
     
 }
 
