@@ -36,7 +36,7 @@
     </header>
     <main>
         <h2 slot="padding-top: 10px">게시글 작성</h2>
-        <form id="container" method="post">
+        <form id="upload-form" action="http://localhost:8080/boards" method="post">
             <div id="title-form">
                 <label for="board-title">제목*</label>
                 <hr class="line" style="margin-top: 15px;">
@@ -62,7 +62,7 @@
             </div>
             <div id="btn-form">
                 <!-- 실제로는 submit 버튼으로 만들어야 함 -->
-                <button id="submit-btn" type="button" disabled>완료</button>
+                <button form="upload-form" id="submit-btn" type="button" disabled>완료</button>
             </div>
         </form>
     </main>
