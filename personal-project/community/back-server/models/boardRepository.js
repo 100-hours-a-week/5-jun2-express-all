@@ -51,7 +51,27 @@ const boards = [
     }
 ];
 
+// 더미 데이터가 5개 이므로 5부터 시작
+let id = 5;
+
 // 게시글 등록
+exports.save = async (req) => {
+    try {
+        const boardId = ++id;
+        const board = {
+            'board_id': boardId,
+            'title': req.title,
+            'content': req.content,
+            'image_url': req.image_url,
+            'created_at': '2024-22-01T12:33:06',
+            'updated_at': '2024-22-01T12:33:06',
+        }
+        boards.push(board);
+        return board;
+    } catch (error) {
+        throw error;
+    }
+}
 
 // 게시글 목록 조회
 
