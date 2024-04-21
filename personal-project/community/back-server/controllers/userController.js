@@ -87,7 +87,7 @@ exports.loginUser = async (req, res, next) => {
         const { email, password } = req.body;
         const userData = { email, password };
 
-        validate(user);
+        validateRequest(userData);
 
         const findUser = await userRepository.findUserByEmailAndPassword(userData);
 
@@ -108,7 +108,7 @@ exports.loginUser = async (req, res, next) => {
         if (error.message === 'user_not_found') {
             return res.status(404).json({ message: error.message });
         } 
-        return res.status(500).json({ message: 'internal_server_error' });
+        return res.status(500).json({ message: error.message });
     }
 }
 
