@@ -229,7 +229,6 @@ exports.findById = (boardId) => {
 // 게시글 수정
 exports.updateBoard = (newBoard) => {
     const targetBoardId = newBoard.board_id;
-    console.log(`target: ${targetBoardId}`);
 
     // 요청 유효성 검사
     const findBoard = boards.find(board => board['board_id'] == targetBoardId);
@@ -245,7 +244,7 @@ exports.updateBoard = (newBoard) => {
     boards[boardIndex - 1].content = newBoard.content;
     boards[boardIndex - 1].image_url = newBoard.image_url;
 
-    return boards[boardIndex];
+    return boards[boardIndex - 1];
 }
 
 // 게시글 삭제
