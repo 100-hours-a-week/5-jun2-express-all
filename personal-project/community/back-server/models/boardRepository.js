@@ -228,7 +228,12 @@ exports.findById = (boardId) => {
 
 // 게시글 수정
 exports.updateBoard = (newBoard) => {
-    const boardId = newBoard.board_id;
+    const targetBoardId = newBoard.board_id;
+    console.log(`target: ${targetBoardId}`);
+
+    // 요청 유효성 검사
+    const findBoard = boards.find(board => board['board_id'] == targetBoardId);
+    const boardIndex = findBoard.board_id;
 
     // 존재하지 않는 게시글인 경우 
     if (findBoard === null || findBoard === undefined) {
@@ -236,9 +241,9 @@ exports.updateBoard = (newBoard) => {
     }
 
     // 수정
-    boards[boardIndex].title = newBoard.title;
-    boards[boardIndex].content = newBoard.content;
-    boards[boardIndex].image_url = newBoard.image_url;
+    boards[boardIndex - 1].title = newBoard.title;
+    boards[boardIndex - 1].content = newBoard.content;
+    boards[boardIndex - 1].image_url = newBoard.image_url;
 
     return boards[boardIndex];
 }
