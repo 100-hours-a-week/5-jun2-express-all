@@ -14,7 +14,7 @@
         <div id="login-box">
             <h2>로그인</h2>
 
-            <form id="login-form" action="./board-list.html" method="post">
+            <form id="login-form" action="http://localhost:8080/users/login" method="post">
                 <div id="email-box">
                     <label for="email">이메일</label>
                     <div class="input-box">
@@ -31,9 +31,9 @@
                 <span id="pw-helper"></span>
             </form>
 
-            <!-- form 외부에 있더라도 js를 통해 추후에 연결 가능 -->
+            <!-- form 외부에 있더라도 form 속성을 통해 연결 가능 -->
             <div id="btns">
-                <button id="login-btn" type="submit">로그인</button>
+                <button form="login-form" id="login-btn" disabled type="submit">로그인</button>
                 <a id="signup-btn" href="/signup">회원가입</a>
             </div>
         </div>

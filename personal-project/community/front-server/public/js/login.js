@@ -65,6 +65,33 @@ function validatePassword() {
     }
 }
 
+// 유저 데이터 서버 전송
+const submitUserData = async (event) => {
+    event.preventDefault();
+    const COMMON_URL = 'http://localhost:8080';
+
+    const userFormData = {
+        'email' : emailInput.value,
+        'password' : passwordInput.value
+    }
+
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(userFormData)
+    }
+
+    const res = await fetch(`${COMMON_URL}/users/login`, {
+        ...option
+    });
+
+    setTimeout(() => {
+        location.replace('/boards');
+    }, 2000);
+}
+
 // 로그인 버튼 활성화
 function activeLoginButton() {
     const email = emailInput.value;
@@ -78,12 +105,6 @@ function activeLoginButton() {
         loginButton.disabled = false;
         loginButton.style.cursor = "pointer";
         loginButton.style.backgroundColor = " #7F6AEE";
-
-        loginButton.addEventListener('click', () => {
-            setTimeout(() => {
-                window.location.href = '/boards'
-            }, 2000);
-        });
     } else {
         loginButton.disabled = true;
         loginButton.style.cursor = "default";
@@ -100,3 +121,5 @@ passwordInput.addEventListener("keyup", () => {
     validatePassword();
     activeLoginButton();
 });
+
+loginButton.addEventListener('click', submitUserData);
