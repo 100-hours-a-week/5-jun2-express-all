@@ -121,19 +121,25 @@ const generateReplies = (comments) => {
 }
 
 const generateBoardContents = async () => {
+    const COMMON_URL = 'http://localhost:8080';
+    const boardId = getPathVariable();
     try {
-        const response = await fetch(boardURL);
+        const option = {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }
+        
+        const response = await fetch(`${COMMON_URL}/boards/${boardId}`, {
+            ...option
+        });
         const json = await response.json();
-        const boards = json.boards;
+        const board = json.data;
 
-        const pathVariable = getPathVariable();
-        const data = findBoardData(boards, pathVariable);
-
-        console.log(data);
-
-        let infoBox = generateInfoBox(data);
-        let contentView = generateContentView(data);
-        let replies = generateReplies(data.comments);
+        let infoBox = generateInfoBox(board);
+        let contentView = generateContentView(board);
+        let replies = generateReplies(board.comments);
 
         document.getElementById('post-info-box').innerHTML = infoBox;
         document.getElementById('content-view').innerHTML = contentView;
