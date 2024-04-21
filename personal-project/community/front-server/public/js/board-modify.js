@@ -28,23 +28,66 @@ const findBoardData = (boards, pathVariable) => {
 }
 
 const generateBoardModify = async () => {
+    const COMMON_URL = 'http://localhost:8080';
+    const boardId = getPathVariable();
     try {
-        const response = await fetch(boardURL);
-        const json = await response.json();
-        const boards = json.boards;
+        const option = {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }
 
-        const pathVariable = getPathVariable();
-        const data = findBoardData(boards, pathVariable);
+        const res = await fetch(`${COMMON_URL}/boards/${boardId}`, {
+            ...option
+        });
+        const json = await res.json();
+        const boards = json.data;
 
-        console.log(data);
-
-        titleInput.value = data.title;
-        contentInput.innerText = data.content;
+        titleInput.value = boards.title;
+        contentInput.innerText = boards.content;
 
     } catch (error) {
         throw error;
     }
 }
+
+const submitBoardData = async (event) => {
+    event.preventDefault();
+    const COMMON_URL = 'http://localhost:8080';
+    const boardId = getPathVariable();
+
+    // 더미 사진
+    const dummyImageURL = 'https://i.namu.wiki/i/w11dbZZeomJI4bD3_KItw3vq7tgglcM1YQA_xHULxMsixPpY1S7KcB8WrEFhJNuSuejiiQkicGKMH12JvpUqBQ.webp';
+
+    const boardFormData = {
+        'title': titleInput.value,
+        'content': contentInput.value,
+        'image_url': dummyImageURL,
+    }
+
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(boardFormData)
+    }
+
+    const res = await fetch(`${COMMON_URL}/boards/${boardId}`, {
+        ...option
+    });
+
+    const json = await res.json();
+    if (res.status == 200 || res.status == 201) {
+        setTimeout(() => {
+            location.replace(`/boards/${boardId}`);
+        }, 1000);
+    } else {
+        alert(json.message);
+    }
+}
+
 const activeSubmitButton = () => {
     let title = titleInput.value;
     let content = contentInput.value;
@@ -74,12 +117,9 @@ const activeSubmitButton = () => {
 
 titleInput.addEventListener('input', activeSubmitButton);
 contentInput.addEventListener('input', activeSubmitButton);
-submitButton.addEventListener('click', () => {
-    const id = getPathVariable();
-    const URL = `/boards/${id}`;
-    window.location.href = URL;
-});
 
 generateBoardModify();
 imageInputButton.addEventListener('click', imageInput.click());
 imageInput.addEventListener('change', showFileName);
+
+submitButton.addEventListener('click', submitBoardData);
