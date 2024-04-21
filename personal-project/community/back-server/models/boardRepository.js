@@ -84,21 +84,21 @@ const boards =  [
             {
                 "comment_id" : 1,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 1",
+                "comment_writer_name" : "더미 작성자 1",
                 "comment_content" : "댓글 내용 1",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 2,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 2",
+                "comment_writer_name" : "더미 작성자 2",
                 "comment_content" : "댓글 내용 2",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 3,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 3",
+                "comment_writer_name" : "더미 작성자 3",
                 "comment_content" : "댓글 내용 3",
                 "created_at" : "2021-01-02T00:00:00"
             }
@@ -119,21 +119,21 @@ const boards =  [
             {
                 "comment_id" : 1,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 1",
+                "comment_writer_name" : "더미 작성자 1",
                 "comment_content" : "댓글 내용 1",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 2,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 2",
+                "comment_writer_name" : "더미 작성자 2",
                 "comment_content" : "댓글 내용 2",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 3,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 3",
+                "comment_writer_name" : "더미 작성자 3",
                 "comment_content" : "댓글 내용 3",
                 "created_at" : "2021-01-02T00:00:00"
             }
@@ -154,21 +154,21 @@ const boards =  [
             {
                 "comment_id" : 1,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 1",
+                "comment_writer_name" : "더미 작성자 1",
                 "comment_content" : "댓글 내용 1",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 2,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 2",
+                "comment_writer_name" : "더미 작성자 2",
                 "comment_content" : "댓글 내용 2",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 3,
                 "comment_writer_profile" : "../resource/image/profile2.jpeg",
-                "comment_writer_name" : "더미 댓글 작성자 3",
+                "comment_writer_name" : "더미 작성자 3",
                 "comment_content" : "댓글 내용 3",
                 "created_at" : "2021-01-02T00:00:00"
             }

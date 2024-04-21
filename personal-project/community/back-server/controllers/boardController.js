@@ -78,7 +78,9 @@ exports.registerBoard = async (req, res, next) => {
 
 // 게시글 목록 조회
 exports.findAllBoards = async (req, res, next) => {
-
+    const boards = boardRepository.findAll();
+    const response = getResponseMessage('success', boards);
+    return res.status(200).json(response);
 }
 
 // 게시글 상세 조회
