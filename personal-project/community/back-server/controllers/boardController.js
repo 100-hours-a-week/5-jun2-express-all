@@ -41,7 +41,7 @@ const getNowDate = () => {
     return dateString + ' ' + timeString;
 }
 
-/* 2) 주요 로직 */
+/* 2) 게시판 로직 */
 
 // 게시글 등록
 exports.registerBoard = async (req, res, next) => {
@@ -152,4 +152,20 @@ exports.deleteBoard = async (req, res, next) => {
         }
         return res.status(500).json({ 'message': error.message });
     }
+}
+
+// 3) 댓글 로직
+// 댓글 등록
+exports.registerComment = async (req, res, next) => {
+
+}
+
+// 댓글 수정
+exports.updateComment = async (req, res, next) => {
+
+}
+
+// 댓글 삭제
+exports.deleteComment = async (req, res, next) => {
+
 }
