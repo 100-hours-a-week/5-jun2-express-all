@@ -3,8 +3,12 @@ const boardURL = '../resource/data/board-data.json';
 
 const replyTextArea = document.getElementById('reply');
 const replySubmitButton = document.getElementById('reply-submit-btn');
+const replyUpdateButton = document.getElementById('reply-update-btn');
+const commentDeleteButton = document.getElementById('reply-delete-btn');
+
 const boardDeleteButton = document.getElementById('board-delete-btn');
-const commentDeleteButton = document.getElementById('comment-delete-btn');
+
+const COMMON_URL = 'http://localhost:8080';
 
 const getPathVariable = () => {
     const path = window.location.pathname;
@@ -35,6 +39,7 @@ const formatDate = (inputDate) => {
     return `${year}:${month}:${day} ${hours}:${minutes}:${seconds}`;
 }
 
+// 게시글 정보
 const generateInfoBox = (element) => {
     let createdAt = formatDate(element.created_at);
 
@@ -58,6 +63,7 @@ const generateInfoBox = (element) => {
     `;
 }
 
+// 게시글 컨텐츠
 const generateContentView = (element) => {
     let contentImgURL = element.image_url;
     let content = element.content;
@@ -85,6 +91,7 @@ const generateContentView = (element) => {
     `;
 }
 
+// 댓글 
 const generateReplyForm = (data) => {
     let commentId = data.comment_id;
     let writerProfileURL = data.comment_writer_profile;
@@ -93,7 +100,7 @@ const generateReplyForm = (data) => {
     let createdAt = formatDate(data.created_at);
 
     return `
-        <div id="comment-${commentId}" class="reply-form">
+        <div id="reply-${commentId}" class="reply-form">
             <div class="reply-info">
                 <div class="reply-header">
                     <div class="writer-info">
@@ -122,8 +129,8 @@ const generateReplies = (comments) => {
     return html;
 }
 
+// 게시글 내용 가져와서 생성
 const generateBoardContents = async () => {
-    const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
     try {
         const option = {
@@ -204,7 +211,6 @@ const updateReply = (element) => {
 // 게시글 삭제
 const deleteBoard = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
 
     const option = {
@@ -228,5 +234,38 @@ const deleteBoard = async (event) => {
     }
 }
 
+/*
+* 댓글 관련 로직
+*/
+// 댓글 등록
+const submitReply = async (event) => {
+    event.preventDefault();
+    const boardId = getPathVariable();
+
+    const replyData = {
+        'reply': replyTextArea.value
+    }
+
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(replyData)
+    }
+
+    const res = await fetch(`${COMMON_URL}/boards/${boardId}/comments`, {
+        ...option
+    });
+
+    const json = await res.json();
+    if (res.status == 200 || res.status == 201) {
+        Location.reload();
+    } else {
+        alert(json.message);
+    }
+}
+
 boardDeleteButton.addEventListener('click', deleteBoard);
+replySubmitButton.addEventListener('click', submitReply);
 

@@ -307,7 +307,19 @@ main {
     padding: 8px;
 }
 
-#reply-submit-btn {
+/* #reply-submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 138px;
+    height: 39px;
+    border-radius: 16px;
+    border: 0;
+    background-color: #ACA0EB;
+    color: #FFFFFF;    
+} */
+
+.reply-btn {
     display: flex;
     justify-content: center;
     align-items: center;
