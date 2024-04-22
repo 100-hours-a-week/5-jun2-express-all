@@ -248,3 +248,17 @@ exports.updateBoard = (newBoard) => {
 }
 
 // 게시글 삭제
+exports.deleteById = (boardId) => {
+    const findBoard = boards.find(board => board['board_id'] == boardId);
+
+    // 숫자가 아닌 경우 예외 처리 로직 필요
+    
+    // 존재하지 않는 게시글인 경우 
+    if (findBoard === null || findBoard === undefined) {
+        throw new Error('board_not_exist');
+    }
+
+    boards.splice(boardId - 1, 1);
+    console.log(boards);
+
+}
