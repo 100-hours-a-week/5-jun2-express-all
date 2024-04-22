@@ -3,6 +3,8 @@ const boardURL = '../resource/data/board-data.json';
 
 const replyTextArea = document.getElementById('reply');
 const replySubmitButton = document.getElementById('reply-submit-btn');
+const boardDeleteButton = document.getElementById('board-delete-btn');
+const commentDeleteButton = document.getElementById('comment-delete-btn');
 
 const getPathVariable = () => {
     const path = window.location.pathname;
@@ -198,4 +200,33 @@ const updateReply = (element) => {
         replyTextArea.textContent = "";
     })
 }
+
+// 게시글 삭제
+const deleteBoard = async (event) => {
+    event.preventDefault();
+    const COMMON_URL = 'http://localhost:8080';
+    const boardId = getPathVariable();
+
+    const option = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const res = await fetch(`${COMMON_URL}/boards/${boardId}`, {
+        ...option
+    });
+
+    const json = await res.json();
+    if (res.status == 200 || res.status == 201) {
+        setTimeout(() => {
+            location.replace('/boards');
+        }, 1000);
+    } else {
+        alert(json.message);
+    }
+}
+
+boardDeleteButton.addEventListener('click', deleteBoard);
 
