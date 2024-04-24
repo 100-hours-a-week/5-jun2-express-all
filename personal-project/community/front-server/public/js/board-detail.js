@@ -10,10 +10,16 @@ const boardDeleteButton = document.getElementById('board-delete-btn');
 
 const COMMON_URL = 'http://localhost:8080';
 
-const getPathVariable = () => {
+const getPathVariable = (dataType) => {
     const path = window.location.pathname;
-    const boardIds = path.split('/');
-    return boardIds[2];
+    const paths = path.split('/');
+
+    if (dataType === 'board') {
+        return paths[2];
+    }
+    if (dataType === 'comment') {
+        return paths[4];
+    }
 }
 
 const findBoardData = (boards, pathVariable) => {
@@ -131,7 +137,7 @@ const generateReplies = (comments) => {
 
 // 게시글 내용 가져와서 생성
 const generateBoardContents = async () => {
-    const boardId = getPathVariable();
+    const boardId = getPathVariable('board');
     try {
         const option = {
             method: 'GET',
@@ -211,7 +217,7 @@ const updateReply = (element) => {
 // 게시글 삭제
 const deleteBoard = async (event) => {
     event.preventDefault();
-    const boardId = getPathVariable();
+    const boardId = getPathVariable('board');
 
     const option = {
         method: 'DELETE',
@@ -240,7 +246,7 @@ const deleteBoard = async (event) => {
 // 댓글 등록
 const submitReply = async (event) => {
     event.preventDefault();
-    const boardId = getPathVariable();
+    const boardId = getPathVariable('board');
 
     const replyData = {
         'comment': replyTextArea.value
@@ -265,6 +271,8 @@ const submitReply = async (event) => {
         alert(json.message);
     }
 }
+
+// 댓글 삭제
 
 boardDeleteButton.addEventListener('click', deleteBoard);
 replySubmitButton.addEventListener('click', submitReply);
