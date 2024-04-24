@@ -65,7 +65,7 @@ exports.registerBoard = async (req, res, next) => {
         return res.status(201).json(response);
     } catch (error) {
         if (error.message == 'invalid_request') {
-            return res.status(400).json({ message: error.messgae });
+            return res.status(400).json({ message: 'invalid_request' });
         }
 
         // 인증되지 않은 사용자 요청인 경우 : 401
