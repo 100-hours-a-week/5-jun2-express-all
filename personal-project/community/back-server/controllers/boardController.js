@@ -162,7 +162,7 @@ exports.registerComment = async (req, res, next) => {
         const comment = req.body.comment;
         const created_at = getNowDate();
 
-        const commentData = boardRepository.saveComment(board_id, comment, getNowDate);
+        const commentData = boardRepository.saveComment(board_id, comment, created_at);
         const response = getResponseMessage('register_success', commentData);
 
         return res.status(200).json(response);
