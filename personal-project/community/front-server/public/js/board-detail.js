@@ -106,7 +106,7 @@ const generateReplyForm = (data) => {
     let createdAt = formatDate(data.created_at);
 
     return `
-        <div id="reply-${commentId}" class="reply-form">
+        <div id="${commentId}" class="reply-form">
             <div class="reply-info">
                 <div class="reply-header">
                     <div class="writer-info">
@@ -120,7 +120,7 @@ const generateReplyForm = (data) => {
                 </div>
             </div>
             <div class="btns">
-                <button type="button" onclick='updateReply(this)' class="reply-modify-btn">수정</button>
+                <button type="button" onclick='submitUpdateReply(this)' class="reply-modify-btn">수정</button>
                 <button type="button" onclick='location.href="#delete-reply-modal"'"><a>삭제</a></button>
             </div>
         </div>
@@ -168,22 +168,6 @@ const generateBoardContents = async () => {
 
 generateBoardContents();
 
-const activeSubmitButton = () => {
-    const isEmpty = (replyTextArea.value.length == 0);
-    if (isEmpty) {
-        replySubmitButton.disabled = true;
-        replySubmitButton.style.backgroundColor = "#ACA0EB";
-        replySubmitButton.style.cursor = "default";
-    } else {
-        replySubmitButton.disabled = false;
-        replySubmitButton.style.backgroundColor = "#7F6AEE";
-        replySubmitButton.style.cursor = "pointer";
-    }
-}
-
-
-replyTextArea.addEventListener('keyup', activeSubmitButton);
-
 const findContentArea = (id) => {
     const children = document.getElementById('reply-list').querySelectorAll('.reply-form');
 
@@ -193,25 +177,6 @@ const findContentArea = (id) => {
             return children[i];
         }
     }
-}
-
-// 나중에 수정해야함
-const updateReply = (element) => {
-    const replyFormElement = element.parentNode.parentNode;
-    const replyContentElement = findContentArea(replyFormElement.id); 
-    console.log(replyContentElement);
-
-    const replyContentArea = replyContentElement.querySelector('.reply-info .reply-content span');
-    const content = replyContentArea.textContent;
-    replyTextArea.value = content;
-    replySubmitButton.textContent = '댓글 수정';
-
-    replySubmitButton.addEventListener('click', () => {
-        replySubmitButton.textContent = '댓글 작성';
-        const updateContent = replyTextArea.value;
-        replyContentArea.textContent = updateContent;
-        replyTextArea.textContent = "";
-    })
 }
 
 // 게시글 삭제
@@ -272,7 +237,83 @@ const submitReply = async (event) => {
     }
 }
 
+// 댓글 수정
+const submitUpdateReply = async (element) => {
+    const replyFormElement = element.parentNode.parentNode;
+    const replyContentElement = findContentArea(replyFormElement.id); 
+    console.log(replyContentElement);
+
+    const replyContentArea = replyContentElement.querySelector('.reply-info .reply-content span');
+    const content = replyContentArea.textContent;
+    replyTextArea.value = content;
+
+    replySubmitButton.style.display = 'none';
+    replyUpdateButton.style.display = '';
+
+    const boardId = getPathVariable('board');
+    const commentId = replyFormElement.id;
+
+    replyUpdateButton.addEventListener('click', async () => {
+        const replyData = {
+            'comment': replyTextArea.value
+        }
+
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(replyData)
+        }
+
+        const res = await fetch(`${COMMON_URL}/boards/${boardId}/comments/${commentId}`, {
+            ...option
+        });
+
+        const json = await res.json();
+
+        if (res.status == 200 || res.status == 201) {
+            replySubmitButton.style.display = '';
+            replyUpdateButton.style.display = 'none';
+            location.reload();
+        } else {
+            alert(json.message);
+        }
+    });
+}
+
 // 댓글 삭제
+
+const activeSubmitButton = () => {
+    const isEmpty = (replyTextArea.value.length == 0);
+    if (isEmpty) {
+        replySubmitButton.disabled = true;
+        replySubmitButton.style.backgroundColor = "#ACA0EB";
+        replySubmitButton.style.cursor = "default";
+    } else {
+        replySubmitButton.disabled = false;
+        replySubmitButton.style.backgroundColor = "#7F6AEE";
+        replySubmitButton.style.cursor = "pointer";
+    }
+}
+
+const activeUpdateButton = () => {
+    const isEmpty = (replyTextArea.value.length == 0);
+    if (isEmpty) {
+        replyUpdateButton.disabled = true;
+        replyUpdateButton.style.backgroundColor = "#ACA0EB";
+        replyUpdateButton.style.cursor = "default";
+    } else {
+        replyUpdateButton.disabled = false;
+        replyUpdateButton.style.backgroundColor = "#7F6AEE";
+        replyUpdateButton.style.cursor = "pointer";
+    }
+}
+
+replyTextArea.addEventListener('keyup', () => {
+    activeSubmitButton(),
+    activeUpdateButton()
+});
 
 boardDeleteButton.addEventListener('click', deleteBoard);
 replySubmitButton.addEventListener('click', submitReply);
