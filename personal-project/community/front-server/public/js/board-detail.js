@@ -243,7 +243,7 @@ const submitReply = async (event) => {
     const boardId = getPathVariable();
 
     const replyData = {
-        'reply': replyTextArea.value
+        'comment': replyTextArea.value
     }
 
     const option = {
@@ -260,7 +260,7 @@ const submitReply = async (event) => {
 
     const json = await res.json();
     if (res.status == 200 || res.status == 201) {
-        Location.reload();
+        location.reload();
     } else {
         alert(json.message);
     }
