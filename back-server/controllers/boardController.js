@@ -165,7 +165,7 @@ exports.registerComment = async (req, res, next) => {
         const commentData = boardRepository.saveComment(board_id, comment, created_at);
         const response = getResponseMessage('register_success', commentData);
 
-        return res.status(200).json(response);
+        return res.status(201).json(response);
 
     } catch (error) {
         // 유효하지 않은 요청인 경우 : 400
