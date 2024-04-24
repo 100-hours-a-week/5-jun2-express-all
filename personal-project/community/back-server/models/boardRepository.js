@@ -179,6 +179,10 @@ const boards =  [
 // 더미 데이터가 5개 이므로 5부터 시작
 let id = 5;
 
+/**
+ * 게시글 관련 로직
+ */
+
 // 게시글 등록
 /*
 * 유저 관련 데이터는 나중에 유저에 따라 다르게 보여줘야 함
@@ -260,5 +264,36 @@ exports.deleteById = (boardId) => {
 
     boards.splice(boardId - 1, 1);
     console.log(boards);
-
 }
+
+/**
+ * 댓글 관련 로직
+ */
+
+// 댓글 등록
+exports.saveComment = (boardId, comment, createdAt) => {
+    const findBoard = this.findById(boardId);
+    const commentId = findBoard['comments'].length + 1;
+
+    // 더미 유저
+    const userId = 1;
+    const nickname = "째용이형";
+    const profileUrl = "../resource/image/jaeyong.jpeg"
+
+    const commentData = {
+        'board_id': boardId,
+        'comment_id': commentId,
+        'comment_content': comment,
+        'comment_writer_name': '일론 머스크',
+        'comment_writer_profile': '../resource/image/musk.jpeg',
+        'created_at': createdAt
+    }
+
+    findBoard['comments'].push(commentData);
+
+    return commentData;
+}
+
+// 댓글 수정
+
+// 댓글 삭제

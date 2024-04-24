@@ -157,7 +157,26 @@ exports.deleteBoard = async (req, res, next) => {
 // 3) 댓글 로직
 // 댓글 등록
 exports.registerComment = async (req, res, next) => {
+    try {
+        const board_id = req.params.boardId;
+        const comment = req.body.comment;
+        const created_at = getNowDate();
 
+        const commentData = boardRepository.saveComment(board_id, comment, getNowDate);
+        const response = getResponseMessage('register_success', commentData);
+
+        return res.status(200).json(response);
+
+    } catch (error) {
+        // 유효하지 않은 요청인 경우 : 400
+        // 인증되지 않은 사용자 요청인 경우 : 401
+        // 권한이 없는 사용자 요청인 경우 : 403
+
+        if (error.message == 'board_not_exist') {
+            return res.status(404).json({ 'message': error.message });
+        }
+        return res.status(500).json({ 'message': error.message });
+    }
 }
 
 // 댓글 수정
