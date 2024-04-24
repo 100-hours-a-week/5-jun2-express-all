@@ -295,5 +295,37 @@ exports.saveComment = (boardId, comment, createdAt) => {
 }
 
 // 댓글 수정
+const findCommentById = (comments, commentId) => {
+    const findComment = comments.find(comment => comment['comment_id'] == commentId);
+
+    // 숫자가 아닌 경우 예외 처리 로직 필요
+
+    // 존재하지 않는 댓글인 경우 
+    if (findComment === null || findComment === undefined) {
+        throw new Error('comment_not_exist');
+    }
+
+    return findComment;
+}
+
+exports.updateComment = (boardId, commentId, updateComment, updatedAt) => {
+    const findBoard = this.findById(boardId);
+    const comments = findBoard['comments'];
+    const findComment = findCommentById(comments, commentId);
+    findComment['comment_content'] = updateComment;
+    findComment['updated_at'] = updatedAt;
+
+    const commentData = {
+        'board_id': boardId,
+        'comment_id': commentId,
+        'comment_content': updateComment,
+        'comment_writer_name': findComment.comment_writer_name,
+        'comment_writer_profile': findComment.comment_writer_profile,
+        'created_at': findComment.createdAt,
+        'updated_at': updatedAt
+    }
+
+    return commentData;
+}
 
 // 댓글 삭제
