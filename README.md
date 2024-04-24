@@ -1,2 +1,3 @@
-# Kakao Cloud School Repository
-과제 및 학습한 내용을 정리하는 레포지토리
+# 5-jun2-park-midnight-food-plz
+
+2주차 커뮤니티 과제
