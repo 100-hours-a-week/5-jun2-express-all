@@ -15,7 +15,7 @@ const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z
  * 2. 입력하지 않은 경우
  * 3. 유효한 형식이 아닌 경우
  */
-function validateEmailPattern(email) {
+const validateEmailPattern = (email) => {
     const length = email.length;
 
     if (length < MIN_EMAIL_LENGTH || length == 0) {
@@ -25,7 +25,7 @@ function validateEmailPattern(email) {
     }
 }
 
-function validateEmail() {
+const validateEmail = () => {
     const email = emailInput.value;
     const isValidEmail = validateEmailPattern(email);
     const isEmpty = (email.length == 0);
@@ -44,11 +44,11 @@ function validateEmail() {
  * 1. 입력하지 않은 경우
  * 2. 유효한 형식이 아닌 경우 (영문, 숫자 조합 8자리 이상)
  */
-function validatePasswordPattern(password) {
+const validatePasswordPattern = (password) => {
     return PASSWORD_PATTERN.test(password);
 }
 
-function validatePassword() {
+const validatePassword = () => {
     const password = passwordInput.value;
     const isValidPassword = validatePasswordPattern(password);
     const isEmpty = (password.length == 0);
@@ -93,7 +93,7 @@ const submitUserData = async (event) => {
 }
 
 // 로그인 버튼 활성화
-function activeLoginButton() {
+const activeLoginButton = () => {
     const email = emailInput.value;
     const password = passwordInput.value;
 

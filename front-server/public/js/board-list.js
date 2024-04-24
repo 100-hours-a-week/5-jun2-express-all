@@ -109,7 +109,7 @@ const generateBoardFromServer = async () => {
 
         return html;
     } catch (error) {
-        console.error('template error!', error);
+        console.error(`template error: ${error}`);
         throw error;
     }
 }
@@ -119,7 +119,7 @@ const displayHTML = async () => {
         const html = await generateBoardFromServer();
         document.getElementById('content-box').innerHTML = html;
     } catch (error) {
-        console.error('Data fetching error:', error);
+        console.error(`Data fetching error: ${error}`);
     }
 }
 

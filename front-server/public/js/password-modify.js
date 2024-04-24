@@ -13,7 +13,7 @@ const writeHelperMessage = (helperText, message) => {
 }
 
 // 1) 비밀번호 유효성 검사
-function validatePassword() {
+const validatePassword = () => {
     const password = passwordInput.value;
     let message = "";
 
@@ -34,7 +34,7 @@ function validatePassword() {
 }
 
 // 2) 비밀번호 확인 유효성 검사
-function validatePasswordCheck() {
+const validatePasswordCheck = () => {
     const password = passwordInput.value;
     const passwordCheck = passwordCheckInput.value;
     let message = "";
@@ -54,8 +54,7 @@ function validatePasswordCheck() {
     }
     writeHelperMessage(passwordCheckHelperText, message);
 }
-
-function activeModifyButton() {
+const activeModifyButton = () => {
     const password = passwordInput.value;
     const passwordCheck = passwordCheckInput.value;
 

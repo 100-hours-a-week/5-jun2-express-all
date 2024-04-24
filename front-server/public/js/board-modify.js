@@ -16,7 +16,7 @@ const getPathVariable = () => {
     return boardIds[2];
 }
 
-function showFileName() {
+const showFileName = () => {
     let file = imageInput.files[0].name;
     if (file != null) {
         fileText.innerText = `선택된 파일 : ${file}`;

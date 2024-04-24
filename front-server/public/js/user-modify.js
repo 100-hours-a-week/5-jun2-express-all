@@ -13,7 +13,7 @@ const isEmpty = (nickname) => {
     return nickname == '';
 }
 
-async function isDuplicated(nickname) {
+const isDuplicated = async (nickname) => {
     const response = await fetch(userDataURL);
     const users = await response.json();
     const result = users.some(user => user.nickname === nickname);
@@ -29,7 +29,7 @@ const writeHelperText = (message) => {
     nicknameHelper.innerText = message;
 }
 
-async function validateNicknameInput() {
+const validateNicknameInput = async () => {
     const nickname = nicknameInput.value;
     let message = "";
 

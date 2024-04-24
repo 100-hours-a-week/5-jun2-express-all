@@ -10,7 +10,7 @@ const fileText = document.getElementById('file-text');
 
 const submitButton = document.getElementById('submit-btn');
 
-function showFileName() {
+const showFileName = () => {
     let file = imageInput.files[0].name;
     if (file != null) {
         fileText.innerText = `선택된 파일 : ${file}`;
@@ -53,7 +53,7 @@ const submitBoardData = async (event) => {
     }
 }
 
-function activeSubmitButton() {
+const activeSubmitButton = () => {
     let isTitleEmpty = (titleInput.value.length == 0);
     let isContentEmpty = (contentInput.value.length == 0);
 

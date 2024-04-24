@@ -34,7 +34,7 @@ const writeHelperMessage = (helperText, message) => {
 }
 
 // 1) 프로필 사진
-function setProfile(event) {
+const setProfile = (event) => {
     let fileReader = new FileReader();
     let image = document.getElementById("profile-img");
     let crossLine = document.getElementById("cross-line");
@@ -69,7 +69,7 @@ function setProfile(event) {
 }
 
 // 2) 이메일 유효성 검사
-async function validateEmailDuplicated(email) {
+const validateEmailDuplicated = async (email) => {
     const response = await fetch(userDataURL);
     const users = await response.json();
     const result = users.some(user => user.email === email);
@@ -79,7 +79,7 @@ async function validateEmailDuplicated(email) {
     return result;
 }
 
-async function validateEmailPattern() {
+const validateEmailPattern = async () => {
     const email = emailInput.value;
     let message = "";
 
@@ -102,7 +102,7 @@ async function validateEmailPattern() {
     writeHelperMessage(emailHelperText, message);
 }
 
-function validateEmail() {
+const validateEmail = () => {
     const email = emailInput.value;
     let message = "";
 
@@ -123,7 +123,7 @@ function validateEmail() {
 }
 
 // 3) 비밀번호 유효성 검사
-function validatePassword() {
+const validatePassword = () => {
     const password = passwordInput.value;
     let message = "";
 
@@ -143,7 +143,7 @@ function validatePassword() {
 }
 
 // 4) 비밀번호 확인 유효성 검사
-function validatePasswordCheck() {
+const validatePasswordChec = () => {
     const password = passwordInput.value;
     const passwordCheck = passwordCheckInput.value;
     let message = "";
@@ -161,14 +161,14 @@ function validatePasswordCheck() {
 }
 
 // 5) 닉네임 유효성 검사
-async function validateNicknameDuplicated(nickname) {
+const validateNicknameDuplicated = async (nickname) => {
     const response = await fetch(userDataURL);
     const users = await response.json();
     const result = users.some(user => user.nickname === nickname);
     return result;
 }
 
-async function validateNickname() {
+const alidateNickname = async () => {
     const nickname = nicknameInput.value;
     let message = "";
 
@@ -235,7 +235,7 @@ const submitUserData = async (event) => {
 
 
 // 회원가입 버튼 활성화 조건
-async function validate(infoType, info) {
+const validate = async (infoType, info) => {
     if (infoType == "profile") {
         let image = document.getElementById("profile-img");
         const hasSrcAttribute = image.getAttribute('src') != null;
@@ -276,7 +276,7 @@ const validateUserInfo = async (userInfo) => {
 }
 
 // 회원가입 버튼 활성화
-async function activeSignupButton() {
+const activeSignupButton = async () => {
     const userInfo = {
         "profile" : profileInput.value,
         "email" : emailInput.value,
