@@ -191,7 +191,7 @@ exports.updateComment = async (req, res, next) => {
         const response = getResponseMessage('update_success', commentData);
 
         return res.status(200).json(response);
-        
+
     } catch (error) {
         // 유효하지 않은 요청인 경우 : 400
         // 인증되지 않은 사용자 요청인 경우 : 401
@@ -206,5 +206,21 @@ exports.updateComment = async (req, res, next) => {
 
 // 댓글 삭제
 exports.deleteComment = async (req, res, next) => {
+    try {
+        const board_id = req.params.boardId;
+        const comment_id = req.params.commentId;
 
+        boardRepository.deleteCommentById(board_id, comment_id);
+
+        return res.status(200).json({ 'message': 'delete_success' });
+    } catch (error) {
+        // 유효하지 않은 요청인 경우 : 400
+        // 인증되지 않은 사용자 요청인 경우 : 401
+        // 권한이 없는 사용자 요청인 경우 : 403
+
+        if (error.message == 'board_not_exist') {
+            return res.status(404).json({ 'message': error.message });
+        }
+        return res.status(500).json({ 'message': error.message });
+    }
 }

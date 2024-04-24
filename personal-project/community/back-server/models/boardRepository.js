@@ -329,3 +329,17 @@ exports.updateComment = (boardId, commentId, updateComment, updatedAt) => {
 }
 
 // 댓글 삭제
+exports.deleteCommentById = (boardId, commentId) => {
+    const findBoard = this.findById(boardId);
+    if (findBoard == null || findBoard == undefined) {
+        throw new Error('board_not_exist');
+    }
+
+    const comments = findBoard['comments'];
+    const targetComment = comments[commentId - 1];
+    if (targetComment == null || targetComment == undefined) {
+        throw new Error('comment_not_exist');
+    }
+
+    comments.splice(commentId - 1, 1);
+}
