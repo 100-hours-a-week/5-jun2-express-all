@@ -1,12 +1,19 @@
 const dataURL = '../resource/data/boards-data.json';
 const boardURL = '../resource/data/board-data.json';
 
+const boardModal = document.getElementById('delete-board-modal');
+const replyModal = document.getElementById('delete-reply-modal');
+
+const boardModalCancelButton = document.getElementById('board-cancel-btn');
+const boardModalConfirmButton = document.getElementById('board-delete-btn');
+
+const replyModalCancelButton = document.getElementById('reply-cancel-btn');
+const replyModalConfirmButton = document.getElementById('reply-delete-btn');
+
 const replyTextArea = document.getElementById('reply');
 const replySubmitButton = document.getElementById('reply-submit-btn');
 const replyUpdateButton = document.getElementById('reply-update-btn');
-const commentDeleteButton = document.getElementById('reply-delete-btn');
-
-const boardDeleteButton = document.getElementById('board-delete-btn');
+const replyDeleteButton = document.getElementById('reply-delete-btn');
 
 const COMMON_URL = 'http://localhost:8080';
 
@@ -63,7 +70,7 @@ const generateInfoBox = (element) => {
             </div>
             <div class="btns">
                 <button type="button" onclick='location.href="/boards/${element.board_id}/edit"'>수정</button>
-                <button type="button" onclick='location.href="#delete-board-modal"'">삭제</button>
+                <button type="button" onclick='showBoardDeleteModal()'>삭제</button>
             </div>
         </div>
     `;
@@ -121,7 +128,7 @@ const generateReplyForm = (data) => {
             </div>
             <div class="btns">
                 <button type="button" onclick='submitUpdateReply(this)' class="reply-modify-btn">수정</button>
-                <button type="button" onclick='location.href="#delete-reply-modal"'"><a>삭제</a></button>
+                <button type="button" onclick='showReplyDeleteModal()'><a>삭제</a></button>
             </div>
         </div>
     `;
@@ -180,6 +187,11 @@ const findContentArea = (id) => {
 }
 
 // 게시글 삭제
+const showBoardDeleteModal = () => {
+    boardModal.classList.remove('hidden');
+    boardModal.classList.add('visible');
+}
+
 const deleteBoard = async (event) => {
     event.preventDefault();
     const boardId = getPathVariable('board');
@@ -199,7 +211,7 @@ const deleteBoard = async (event) => {
     if (res.status == 200 || res.status == 201) {
         setTimeout(() => {
             location.replace('/boards');
-        }, 1000);
+        }, 500);
     } else {
         alert(json.message);
     }
@@ -208,6 +220,8 @@ const deleteBoard = async (event) => {
 /*
 * 댓글 관련 로직
 */
+
+
 // 댓글 등록
 const submitReply = async (event) => {
     event.preventDefault();
@@ -283,6 +297,14 @@ const submitUpdateReply = async (element) => {
 }
 
 // 댓글 삭제
+const showReplyDeleteModal = () => {
+    replyModal.classList.remove('hidden');
+    replyModal.classList.add('visible');
+}
+
+const deleteReply = async (event) => {
+    event.preventDefault();
+}
 
 const activeSubmitButton = () => {
     const isEmpty = (replyTextArea.value.length == 0);
@@ -315,6 +337,18 @@ replyTextArea.addEventListener('keyup', () => {
     activeUpdateButton()
 });
 
-boardDeleteButton.addEventListener('click', deleteBoard);
+boardModalCancelButton.addEventListener('click', () => {
+    boardModal.classList.remove('visible');
+    boardModal.classList.add('hidden');
+})
+boardModalConfirmButton.addEventListener('click', deleteBoard);
+
+replyModalCancelButton.addEventListener('click', () => {
+    replyModal.classList.remove('visible');
+    replyModal.classList.add('hidden');
+})
+
 replySubmitButton.addEventListener('click', submitReply);
+replyDeleteButton.addEventListener('click', deleteReply);
+
 

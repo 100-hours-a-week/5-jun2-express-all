@@ -64,28 +64,28 @@
         </div>
 
         <!-- modal -->
-        <div class="modal-wrapper" id="delete-board-modal">
+        <div class="modal-wrapper hidden" id="delete-board-modal">
             <div class="modal-content">
                 <div class="modal-msg">
                     <p class="delete-question">게시글을 삭제하시겠습니까?</p>
                     <p class="delete-notice">삭제한 내용은 복구할 수 없습니다.</p>
                 </div>
                 <div class="modal-btns">
-                    <a class="modal-btn modal-cancel-btn" href="#">취소</a>
-                    <a id="board-delete-btn" class="modal-btn modal-confirm-btn" href="#">확인</a>
+                    <button id="board-cancel-btn" class="modal-btn modal-cancel-btn" type="button">취소</button>
+                    <button id="board-delete-btn" class="modal-btn modal-confirm-btn" type="button">확인</button>
                 </div>
             </div>
         </div>
 
-        <div class="modal-wrapper" id="delete-reply-modal">
+        <div class="modal-wrapper hidden" id="delete-reply-modal">
             <div class="modal-content">
                 <div class="modal-msg">
                     <p class="delete-question">댓글을 삭제하시겠습니까?</p>
                     <p class="delete-notice">삭제한 내용은 복구할 수 없습니다.</p>
                 </div>
                 <div class="modal-btns">
-                    <a class="modal-btn modal-cancel-btn" href="#">취소</a>
-                    <a id="reply-delete-btn" class="modal-btn modal-confirm-btn" href="#">확인</a>
+                    <a id="reply-cancel-btn" class="modal-btn modal-cancel-btn">취소</a>
+                    <a id="reply-delete-btn" class="modal-btn modal-confirm-btn">확인</a>
                 </div>
             </div>
         </div>

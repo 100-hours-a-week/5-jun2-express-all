@@ -371,13 +371,12 @@ main {
 
 /** modal **/
 .modal-wrapper {
-    display: none;
-    position: fixed;
+    position: absolute;
     top: 200px;
     left: 785px;
     width: 350px;
     height: 200px;
-    z-index: 999;
+
     background-color: #FFFFFF;
     border-radius: 12px;
 }
@@ -423,9 +422,14 @@ main {
     justify-content: center;
     align-items: center;
     border-radius: 12px;
+    border: 0;
     width: 100px;
     height: 40px;
     text-decoration: none;
+}
+
+.modal-btn:hover {
+    cursor: pointer;
 }
 
 .modal-cancel-btn {
@@ -438,7 +442,10 @@ main {
     color: #000000;
 }
 
-/* 모달이 열렸을 때, URL에 #modal이 붙음 */
-:target {
-    display: block;
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden;
 }
