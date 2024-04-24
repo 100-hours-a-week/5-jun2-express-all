@@ -235,7 +235,7 @@ exports.updateBoard = (newBoard) => {
     const targetBoardId = newBoard.board_id;
 
     // 요청 유효성 검사
-    const findBoard = boards.find(board => board['board_id'] == targetBoardId);
+    const findBoard = this.findById(targetBoardId);
     const boardIndex = findBoard.board_id;
 
     // 존재하지 않는 게시글인 경우 
@@ -253,7 +253,7 @@ exports.updateBoard = (newBoard) => {
 
 // 게시글 삭제
 exports.deleteById = (boardId) => {
-    const findBoard = boards.find(board => board['board_id'] == boardId);
+    const findBoard = this.findById(boardId);
 
     // 숫자가 아닌 경우 예외 처리 로직 필요
     
