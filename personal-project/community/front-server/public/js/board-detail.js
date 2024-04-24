@@ -128,7 +128,7 @@ const generateReplyForm = (data) => {
             </div>
             <div class="btns">
                 <button type="button" onclick='submitUpdateReply(this)' class="reply-modify-btn">수정</button>
-                <button type="button" onclick='showReplyDeleteModal()'><a>삭제</a></button>
+                <button type="button" onclick='showReplyDeleteModal(this)'><a>삭제</a></button>
             </div>
         </div>
     `;
@@ -187,7 +187,7 @@ const findContentArea = (id) => {
 }
 
 // 게시글 삭제
-const showBoardDeleteModal = () => {
+const showBoardDeleteModal = (element) => {
     boardModal.classList.remove('hidden');
     boardModal.classList.add('visible');
 }
@@ -297,13 +297,50 @@ const submitUpdateReply = async (element) => {
 }
 
 // 댓글 삭제
-const showReplyDeleteModal = () => {
+const elements = [];
+const showReplyDeleteModal = (element) => {
     replyModal.classList.remove('hidden');
     replyModal.classList.add('visible');
+    window.scrollTo(0, 0, 'smooth');
+
+    if (elements.isEmpty) {
+        elements.push(element);
+    } else {
+        elements.pop();
+        elements.push(element);
+    }
+
+    replyDeleteButton.addEventListener('click', deleteReply);
 }
 
 const deleteReply = async (event) => {
     event.preventDefault();
+    const element = elements[0];
+    const replyFormElement = element.parentNode.parentNode;
+    const boardId = getPathVariable('board');
+    const commentId = replyFormElement.id;
+
+    replyModal.classList.remove('visible');
+    replyModal.classList.add('hidden');
+
+    const option = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const res = await fetch(`${COMMON_URL}/boards/${boardId}/comments/${commentId}`, {
+        ...option
+    });
+
+    const json = await res.json();
+
+    if (res.status == 200 || res.status == 201) {
+        location.reload();
+    } else {
+        alert(json.message);
+    }
 }
 
 const activeSubmitButton = () => {
@@ -349,6 +386,5 @@ replyModalCancelButton.addEventListener('click', () => {
 })
 
 replySubmitButton.addEventListener('click', submitReply);
-replyDeleteButton.addEventListener('click', deleteReply);
 
 
