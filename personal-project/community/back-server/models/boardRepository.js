@@ -336,10 +336,11 @@ exports.deleteCommentById = (boardId, commentId) => {
     }
 
     const comments = findBoard['comments'];
-    const targetComment = comments[commentId - 1];
-    if (targetComment == null || targetComment == undefined) {
+    const index = comments.findIndex(comment => comment.comment_id == commentId);
+
+    if (index < 0 || index > comments.size) {
         throw new Error('comment_not_exist');
     }
 
-    comments.splice(commentId - 1, 1);
+    comments.splice(index, 1);
 }
