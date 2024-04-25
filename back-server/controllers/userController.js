@@ -81,6 +81,12 @@ exports.signupUser = async (req, res, next) => {
     }
 }
 
+const authData = {
+    email: 'wnstj@naver.com',
+    password: '111111',
+    nickname: 'jun'
+}
+
 // 로그인
 exports.loginUser = async (req, res, next) => {
     try {
@@ -88,19 +94,15 @@ exports.loginUser = async (req, res, next) => {
         const userData = { email, password };
 
         validateRequest(userData);
-
         const findUser = await userRepository.findUserByEmailAndPassword(userData);
 
-        // 인증 로직 대신 랜덤 토큰 부여
-        const randomToken = generateRandomString(Math.floor(Math.random() * 11) + 40);
-        findUser.token = randomToken;
-
-        const response = getResponseMessage('login_success', findUser);
-
-        // 데이터 출력
-        console.log(response);
-
-        return res.status(200).json(response);
+        // 인증 성공시
+        if (findUser) {
+            console.log(req.session);
+            req.session.is_logined = true;
+            req.session.user_id = findUser.user_id;
+            return res.status(200).json({ message: 'login_success' });
+        }
     } catch (error) {
         if (error.message === 'invalid_request') {
             return res.status(400).json({ message: error.message });

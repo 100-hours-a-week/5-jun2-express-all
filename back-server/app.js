@@ -1,9 +1,23 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const session = require('express-session');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const path = require('path');
-
 const app = express();
+const FileStore = require('session-file-store')(session);
+
+app.use(session({
+    secret: 'exam_secret_key',
+    resave: false,
+    cookie: { maxAge: 30000 },
+    saveUninitialized: true,
+    store: new FileStore(),
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: false,
+        secure: false
+    }
+}))
 
 const PORT = 8080;
 
