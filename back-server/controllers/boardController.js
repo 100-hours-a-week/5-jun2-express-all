@@ -76,6 +76,28 @@ exports.registerBoard = async (req, res, next) => {
     }
 }
 
+exports.registerBoardWithImage = (req, res, next) => {
+    try {
+        const title = req.body.title;
+        const content = req.body.content;
+        const created_at = getNowDate();
+        const updated_at = getNowDate();
+        const image_url = req.file.path;
+        const board = { title, content, image_url, created_at, updated_at };
+
+        validateRequest(board);
+
+        console.log(board);
+
+        const findBoard = boardRepository.save(board);
+        const response = getResponseMessage('register_success', findBoard);
+        
+        return res.status(201).json(response);
+    } catch (error) {
+
+    }
+}
+
 // 게시글 목록 조회
 exports.findAllBoards = async (req, res, next) => {
     try {
