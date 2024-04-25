@@ -3,6 +3,8 @@ const contentInput = document.getElementById('content');
 const helperText = document.querySelector('#helper-text span');
 const submitButton = document.getElementById('submit-btn');
 
+const COMMON_URL = 'http://localhost:8080';
+
 // 이미지 업로드 관련
 const imageInputButton = document.getElementById('img-input-btn');
 const imageInput = document.getElementById('img-input');
@@ -28,7 +30,6 @@ const findBoardData = (boards, pathVariable) => {
 }
 
 const generateBoardModify = async () => {
-    const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
     try {
         const option = {
@@ -54,7 +55,6 @@ const generateBoardModify = async () => {
 
 const submitBoardData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
 
     // JSON 전송

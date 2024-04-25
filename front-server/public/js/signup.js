@@ -6,6 +6,7 @@
 */
 
 const userDataURL = "../resource/data/user-data.json";
+const COMMON_URL = 'http://localhost:8080';
 
 // Input
 const profileInput = document.getElementById('image-upload');
@@ -199,7 +200,6 @@ const validateNickname = async () => {
 // 유저 데이터 서버 전송
 const submitUserData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
     
     // 더미 프로필 사진
     const dummyProfileURL = 'http://profiles.com/profile/profile.jpg';

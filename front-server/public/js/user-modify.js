@@ -8,6 +8,7 @@ const userDeleteButton = document.getElementById('user-delete-btn');
 const NICKNAME_PATTERN = /^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,10}$/;
 
 const userDataURL = '/resource/data/user-data.json';
+const COMMON_URL = 'http://localhost:8080';
 
 const isEmpty = (nickname) => {
     return nickname == '';

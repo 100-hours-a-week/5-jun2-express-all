@@ -4,6 +4,8 @@ const emailHelperText = document.getElementById('email-helper');
 const passwordHelperText = document.getElementById('pw-helper');
 const loginButton = document.getElementById('login-btn');
 
+const COMMON_URL = 'http://localhost:8080';
+
 // 조건
 const MIN_EMAIL_LENGTH = 8;
 const EMAIL_PATTERN = /^[a-zA-Z_\.\-]+@[a-zA-Z0-9\-]+\.[A-za-z0-9\-]+/;
@@ -68,7 +70,6 @@ const validatePassword = () => {
 // 유저 데이터 서버 전송
 const submitUserData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
 
     const userFormData = {
         'email' : emailInput.value,

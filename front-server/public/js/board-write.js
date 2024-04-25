@@ -10,6 +10,8 @@ const fileText = document.getElementById('file-text');
 
 const submitButton = document.getElementById('submit-btn');
 
+const COMMON_URL = 'http://localhost:8080';
+
 const showFileName = () => {
     let file = imageInput.files[0].name;
     if (file != null) {
@@ -20,7 +22,6 @@ const showFileName = () => {
 // 게시글 데이터 서버 전송
 const submitBoardData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
 
     // JSON 전송
     // const boardFormData = {

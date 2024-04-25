@@ -1,6 +1,7 @@
 // TO-BE : 인피니티 스크롤
 
 const dataURL = '../resource/data/boards-data.json';
+const COMMON_URL = 'http://localhost:8080';
 
 /*
 * 비동기 코드를 작성하는 방법
@@ -83,7 +84,6 @@ const generateBoardFromData = async () => {
 
 // 서버에서 데이터 불러오는 로직
 const generateBoardFromServer = async () => {
-    const COMMON_URL = 'http://localhost:8080';
     try {
         console.log("=== 데이터 받기 시작 ===");
 
