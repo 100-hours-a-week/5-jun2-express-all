@@ -87,10 +87,10 @@ exports.registerBoardWithImage = (req, res, next) => {
 
         validateRequest(board);
 
-        console.log(board);
-
         const findBoard = boardRepository.save(board);
         const response = getResponseMessage('register_success', findBoard);
+
+        console.log(response);
         
         return res.status(201).json(response);
     } catch (error) {

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
@@ -10,11 +11,18 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+const uploadPath = path.join(__dirname, 'uploads');
+app.use(express.static(uploadPath));
+
+console.log(path.join(__dirname, 'uploads'));
+
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
+const imageRouter = require('./routes/imageRouter');
 
 app.use("/users", userRouter);
 app.use("/boards", boardRouter);
+app.use("/images", imageRouter, express.static(path.join(__dirname, 'uploads')));
 
 // check server connection
 app.get('/', (req, res) => {
