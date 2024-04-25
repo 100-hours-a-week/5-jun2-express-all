@@ -57,21 +57,31 @@ const submitBoardData = async (event) => {
     const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
 
-    // 더미 사진
-    const dummyImageURL = 'https://i.namu.wiki/i/w11dbZZeomJI4bD3_KItw3vq7tgglcM1YQA_xHULxMsixPpY1S7KcB8WrEFhJNuSuejiiQkicGKMH12JvpUqBQ.webp';
+    // JSON 전송
+    // const boardFormData = {
+    //     'title': titleInput.value,
+    //     'content': contentInput.value,
+    //     'image_url': dummyImageURL,
+    // }
 
-    const boardFormData = {
-        'title': titleInput.value,
-        'content': contentInput.value,
-        'image_url': dummyImageURL,
-    }
+    // const option = {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type' : 'application/json'
+    //     },
+    //     body: JSON.stringify(boardFormData)
+    // }
+
+    // FormData 전송
+    const formData = new FormData();
+    formData.append('title', titleInput.value);
+    formData.append('content', contentInput.value);
+    formData.append('image', imageInput.files[0]);
 
     const option = {
         method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify(boardFormData)
+        cache: 'no-cache',
+        body: formData
     }
 
     const res = await fetch(`${COMMON_URL}/boards/${boardId}`, {
