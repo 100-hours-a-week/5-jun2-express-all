@@ -2,7 +2,7 @@
 
 ## 1️⃣ 패키지 구조
 ### 1) BE
-
+```text
 📦back-server
  ┣ 📂controllers
  ┃ ┣ 📜boardController.js
@@ -19,9 +19,10 @@
  ┣ 📜app.js
  ┣ 📜package-lock.json
  ┗ 📜package.json
- <br><br>
+ ```
 
  ### 2) FE
+ ```text
  📦front-server
  ┣ 📂public
  ┃ ┣ 📂css
@@ -65,3 +66,4 @@
  ┣ 📜app.js
  ┣ 📜package-lock.json
  ┗ 📜package.json
+ ```
