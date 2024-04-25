@@ -88,9 +88,14 @@ const submitUserData = async (event) => {
         ...option
     });
 
-    setTimeout(() => {
-        location.replace('/boards');
-    }, 2000);
+    if (res.status == 200) {
+        alert('로그인 성공!');
+        setTimeout(() => {
+            location.replace('/boards');
+        }, 1000);
+    } else {
+        alert('존재하지 않는 유저입니다!');
+    }
 }
 
 // 로그인 버튼 활성화
