@@ -134,7 +134,8 @@ exports.findByBoardId = async (req, res, next) => {
 exports.updateBoard = async (req, res, next) => {
     try {
         const board_id = req.params.boardId;
-        const { title, content, image_url } = req.body;
+        const { title, content } = req.body;
+        const image_url = req.file.path;
         const newBoardData = { board_id, title, content, image_url };
 
         const updatedBoard = boardRepository.updateBoard(newBoardData);

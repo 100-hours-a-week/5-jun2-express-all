@@ -41,7 +41,7 @@ router.get("/", boardController.findAllBoards);
 router.get("/:boardId", boardController.findByBoardId);
 
 // 게시글 수정
-router.post("/:boardId", boardController.updateBoard);
+router.post("/:boardId", upload.single('image'), boardController.updateBoard);
 
 // 게시글 삭제
 router.delete("/:boardId", boardController.deleteBoard);
