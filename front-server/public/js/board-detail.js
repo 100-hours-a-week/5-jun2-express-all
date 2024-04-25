@@ -78,7 +78,9 @@ const generateInfoBox = (element) => {
 
 // 게시글 컨텐츠
 const generateContentView = (element) => {
-    let contentImgURL = element.image_url;
+    let fileName = element.image_url.split('/')[1];
+    let contentImgURL = `${COMMON_URL}/images/${fileName}`;
+    console.log(`contentImgURL: ${contentImgURL}`);
     let content = element.content;
     let viewsCount = formatNumber(element.views_count);
     let commentsCount = formatNumber(element.comments_count);
