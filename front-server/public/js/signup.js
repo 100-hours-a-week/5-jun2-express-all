@@ -143,7 +143,7 @@ const validatePassword = () => {
 }
 
 // 4) 비밀번호 확인 유효성 검사
-const validatePasswordChec = () => {
+const validatePasswordCheck = () => {
     const password = passwordInput.value;
     const passwordCheck = passwordCheckInput.value;
     let message = "";
@@ -168,7 +168,7 @@ const validateNicknameDuplicated = async (nickname) => {
     return result;
 }
 
-const alidateNickname = async () => {
+const validateNickname = async () => {
     const nickname = nicknameInput.value;
     let message = "";
 
@@ -306,7 +306,7 @@ emailInput.addEventListener('keyup', () => {
 });
 emailInput.addEventListener('focusout', validateEmailPattern);
 passwordInput.addEventListener('focusout', validatePassword);
-passwordCheckInput.addEventListener('focusout',  validatePasswordCheck);
+passwordCheckInput.addEventListener('focusout', validatePasswordCheck);
 nicknameInput.addEventListener('focusout', validateNickname);
 
 profileInputCircle.addEventListener('change', activeSignupButton);
