@@ -36,7 +36,7 @@
     </header>
     <main>
         <h2 slot="padding-top: 10px">게시글 작성</h2>
-        <form id="upload-form" action="http://localhost:8080/boards" method="post">
+        <form id="upload-form" action="http://localhost:8080/boards" enctype="multipart/form-data" method="post">
             <div id="title-form">
                 <label for="board-title">제목*</label>
                 <hr class="line" style="margin-top: 15px;">
