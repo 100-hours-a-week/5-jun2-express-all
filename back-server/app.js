@@ -11,9 +11,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-const uploadPath = path.join(__dirname, 'uploads');
-app.use(express.static(uploadPath));
-
 console.log(path.join(__dirname, 'uploads'));
 
 const userRouter = require('./routes/userRouter');
