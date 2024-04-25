@@ -66,7 +66,3 @@
  ┣ 📜app.js
  ┣ 📜package-lock.json
  ┗ 📜package.json
-<<<<<<< HEAD
-=======
- ```
->>>>>>> develop
