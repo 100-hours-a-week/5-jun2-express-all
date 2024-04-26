@@ -1,21 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const session = require('express-session');
-const app = express();
-const FileStore = require('session-file-store')(session);
-
-app.use(session({
-    secret: 'exam_secret_key',
-    resave: false,
-    cookie: { maxAge: 30000 },
-    saveUninitialized: true,
-    store: new FileStore(),
-    cookie: {
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: false,
-        secure: false
-    }
-}))
 
 const userController = require('../controllers/userController');
 

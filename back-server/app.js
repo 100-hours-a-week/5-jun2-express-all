@@ -6,30 +6,33 @@ const path = require('path');
 const app = express();
 const FileStore = require('session-file-store')(session);
 
+const userRouter = require('./routes/userRouter');
+const boardRouter = require('./routes/boardRouter');
+const imageRouter = require('./routes/imageRouter');
+
+const corsOprions = {
+    origin: 'http://localhost:3000',
+    credentials: true
+}
+
 app.use(session({
+    name: 'session_id',
     secret: 'exam_secret_key',
     resave: false,
-    cookie: { maxAge: 30000 },
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: new FileStore(),
     cookie: {
         maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: false,
+        httpOnly: false,    // https 라면 true 설정해야 함 -> JS에서 사용 불가능
         secure: false
     }
 }))
 
 const PORT = 8080;
 
-app.use(cors());
+app.use(cors(corsOprions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-console.log(path.join(__dirname, 'uploads'));
-
-const userRouter = require('./routes/userRouter');
-const boardRouter = require('./routes/boardRouter');
-const imageRouter = require('./routes/imageRouter');
 
 app.use("/users", userRouter);
 app.use("/boards", boardRouter);

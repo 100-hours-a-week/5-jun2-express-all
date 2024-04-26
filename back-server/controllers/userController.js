@@ -88,21 +88,32 @@ const authData = {
 }
 
 // 로그인
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = (req, res, next) => {
     try {
         const { email, password } = req.body;
         const userData = { email, password };
 
         validateRequest(userData);
-        const findUser = await userRepository.findUserByEmailAndPassword(userData);
+        const findUser = userRepository.findUserByEmailAndPassword(userData);
+
+        req.session.save(() => {
+            req.session.user = {
+                id : findUser.user_id,
+                email : findUser.email
+            }
+            console.log(req.session);
+            res.status(200).json({ message: 'login_succss' });
+        })
 
         // 인증 성공시
-        if (findUser) {
-            console.log(req.session);
-            req.session.is_logined = true;
-            req.session.user_id = findUser.user_id;
-            return res.status(200).json({ message: 'login_success' });
-        }
+        // if (findUser != null || findUser != undefined) {
+        //     req.session.save(() => {
+        //         req.session.is_logined = true;
+        //         req.session.user = findUser;
+        //         console.log(req.session);
+        //         res.status(200).json({ message: 'login_success' });
+        //     })
+        // }
     } catch (error) {
         if (error.message === 'invalid_request') {
             return res.status(400).json({ message: error.message });
@@ -116,7 +127,9 @@ exports.loginUser = async (req, res, next) => {
 
 // 로그아웃
 exports.logoutUser = async (req, res, next) => {
-
+    req.session.destroy(() => {
+        res.status(200).json({ message: 'logout_success'});
+    })
 }
 
 // 회원 정보 수정

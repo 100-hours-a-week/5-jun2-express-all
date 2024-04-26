@@ -90,21 +90,18 @@ exports.save = async (req) => {
 }
 
 // 로그인
-exports.findUserByEmailAndPassword = async (req) => {
-    return new Promise((resolve, reject) => {
-        const findUser = users.find(user => user.email === req['email'] && user['password'] === req.password);
-
-        if (findUser) {
-            const loginInfo = {
-                'user_id': findUser.user_id,
-                'email': findUser.email,
-                'nickname': findUser.nickname 
-            }
-            resolve(loginInfo);
-        } else {
-            throw new Error('user_not_found');
-        }  
-    });
+exports.findUserByEmailAndPassword = (req) => {
+    const findUser = users.filter(user => user.email == req.email && user.password == req.password);
+    if (findUser) {
+        const loginInfo = {
+            'user_id': findUser[0].user_id,
+            'email': findUser[0].email,
+            'nickname': findUser[0].nickname 
+        }
+        return loginInfo;
+    } else {
+        throw new Error('user_not_found');
+    }  
 }
 
 // 로그아웃
