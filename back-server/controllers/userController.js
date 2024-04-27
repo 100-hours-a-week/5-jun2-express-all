@@ -88,21 +88,52 @@ const authData = {
 }
 
 // 로그인
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = (req, res, next) => {
     try {
         const { email, password } = req.body;
         const userData = { email, password };
 
         validateRequest(userData);
-        const findUser = await userRepository.findUserByEmailAndPassword(userData);
 
-        // 인증 성공시
-        if (findUser) {
+        if (req.session.user) {
+            res.status(200).json({ message: 'already_logined' });
+        } else {
+            const findUser = userRepository.findUserByEmailAndPassword(userData);
+            if (!findUser) {
+                return res.status(401).json({ message: 'Invalid credentials' });
+            }
+    
+            // 세션에 사용자 정보를 저장합니다.
+            req.session.user = {
+                id: findUser.user_id,
+                email: findUser.email,
+                authorized: true
+            };
+            res.cookie('session_id', req.session, {
+                maxAge: 10000
+            });
             console.log(req.session);
-            req.session.is_logined = true;
-            req.session.user_id = findUser.user_id;
+
             return res.status(200).json({ message: 'login_success' });
         }
+        // req.session.save(() => {
+        //     req.session.user = {
+        //         id : findUser.user_id,
+        //         email : findUser.email
+        //     }
+        //     console.log(req.session);
+        //     res.status(200).json({ message: 'login_succss' });
+        // })
+
+        // 인증 성공시
+        // if (findUser != null || findUser != undefined) {
+        //     req.session.save(() => {
+        //         req.session.is_logined = true;
+        //         req.session.user = findUser;
+        //         console.log(req.session);
+        //         res.status(200).json({ message: 'login_success' });
+        //     })
+        // }
     } catch (error) {
         if (error.message === 'invalid_request') {
             return res.status(400).json({ message: error.message });
@@ -116,7 +147,10 @@ exports.loginUser = async (req, res, next) => {
 
 // 로그아웃
 exports.logoutUser = async (req, res, next) => {
-
+    if (req.session.user) {
+        req.session.destroy();
+        res.status(200).json({ message: 'logout_success'});
+    }
 }
 
 // 회원 정보 수정
