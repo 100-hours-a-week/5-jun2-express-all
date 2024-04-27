@@ -76,6 +76,7 @@ const submitUserData = async (event) => {
     }
 
     const option = {
+        credentials: 'include',
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
