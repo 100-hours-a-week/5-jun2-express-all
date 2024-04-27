@@ -94,16 +94,36 @@ exports.loginUser = (req, res, next) => {
         const userData = { email, password };
 
         validateRequest(userData);
-        const findUser = userRepository.findUserByEmailAndPassword(userData);
 
-        req.session.save(() => {
-            req.session.user = {
-                id : findUser.user_id,
-                email : findUser.email
+        if (req.session.user) {
+            res.status(200).json({ message: 'already_logined' });
+        } else {
+            const findUser = userRepository.findUserByEmailAndPassword(userData);
+            if (!findUser) {
+                return res.status(401).json({ message: 'Invalid credentials' });
             }
+    
+            // 세션에 사용자 정보를 저장합니다.
+            req.session.user = {
+                id: findUser.user_id,
+                email: findUser.email,
+                authorized: true
+            };
+            res.cookie('session_id', req.session, {
+                maxAge: 10000
+            });
             console.log(req.session);
-            res.status(200).json({ message: 'login_succss' });
-        })
+
+            return res.status(200).json({ message: 'login_success' });
+        }
+        // req.session.save(() => {
+        //     req.session.user = {
+        //         id : findUser.user_id,
+        //         email : findUser.email
+        //     }
+        //     console.log(req.session);
+        //     res.status(200).json({ message: 'login_succss' });
+        // })
 
         // 인증 성공시
         // if (findUser != null || findUser != undefined) {
@@ -127,9 +147,10 @@ exports.loginUser = (req, res, next) => {
 
 // 로그아웃
 exports.logoutUser = async (req, res, next) => {
-    req.session.destroy(() => {
+    if (req.session.user) {
+        req.session.destroy();
         res.status(200).json({ message: 'logout_success'});
-    })
+    }
 }
 
 // 회원 정보 수정

@@ -3,8 +3,9 @@ const session = require('express-session');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cookieParser = require('cookie-parser')
 const app = express();
-const FileStore = require('session-file-store')(session);
+const MemoryStore = require('memorystore')(session);
 
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
@@ -19,8 +20,8 @@ app.use(session({
     name: 'session_id',
     secret: 'exam_secret_key',
     resave: false,
-    saveUninitialized: false,
-    store: new FileStore(),
+    saveUninitialized: true,
+    store: new MemoryStore(),
     cookie: {
         maxAge: 24 * 60 * 60 * 1000,
         httpOnly: false,    // https 라면 true 설정해야 함 -> JS에서 사용 불가능
@@ -31,6 +32,7 @@ app.use(session({
 const PORT = 8080;
 
 app.use(cors(corsOprions));
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
