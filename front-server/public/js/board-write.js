@@ -22,22 +22,7 @@ const showFileName = () => {
 // 게시글 데이터 서버 전송
 const submitBoardData = async (event) => {
     event.preventDefault();
-
-    // JSON 전송
-    // const boardFormData = {
-    //     'title': titleInput.value,
-    //     'content': contentInput.value,
-    //     'image_url': dummyImageURL,
-    // }
-
-    // const option = {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type' : 'application/json'
-    //     },
-    //     body: JSON.stringify(boardFormData)
-    // }
-
+    
     // FormData 전송
     const formData = new FormData();
     formData.append('title', titleInput.value);

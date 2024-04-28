@@ -4,12 +4,12 @@ const emailHelperText = document.getElementById('email-helper');
 const passwordHelperText = document.getElementById('pw-helper');
 const loginButton = document.getElementById('login-btn');
 
-const COMMON_URL = 'http://localhost:8080';
-
 // 조건
 const MIN_EMAIL_LENGTH = 8;
 const EMAIL_PATTERN = /^[a-zA-Z_\.\-]+@[a-zA-Z0-9\-]+\.[A-za-z0-9\-]+/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,20}/;
+
+const COMMON_URL = 'http://localhost:8080';
 
 /*
  * 이메일 유효성 검사

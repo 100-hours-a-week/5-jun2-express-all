@@ -17,7 +17,7 @@ const validatePassword = () => {
     const password = passwordInput.value;
     let message = "";
 
-    let isEmpty = (password == '');
+    let isEmpty = (password == "");
     let isValidPattern = PASSWORD_PATTERN.test(password);
 
     if (isEmpty) {

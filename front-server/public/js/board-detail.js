@@ -15,6 +15,8 @@ const replySubmitButton = document.getElementById('reply-submit-btn');
 const replyUpdateButton = document.getElementById('reply-update-btn');
 const replyDeleteButton = document.getElementById('reply-delete-btn');
 
+const logoutButton = document.getElementById('logout-btn');
+
 const COMMON_URL = 'http://localhost:8080';
 
 const getPathVariable = (dataType) => {
@@ -80,7 +82,6 @@ const generateInfoBox = (element) => {
 const generateContentView = (element) => {
     let fileName = element.image_url.split('/')[1];
     let contentImgURL = `${COMMON_URL}/images/${fileName}`;
-    console.log(`contentImgURL: ${contentImgURL}`);
     let content = element.content;
     let viewsCount = formatNumber(element.views_count);
     let commentsCount = formatNumber(element.comments_count);
@@ -257,7 +258,6 @@ const submitReply = async (event) => {
 const submitUpdateReply = async (element) => {
     const replyFormElement = element.parentNode.parentNode;
     const replyContentElement = findContentArea(replyFormElement.id); 
-    console.log(replyContentElement);
 
     const replyContentArea = replyContentElement.querySelector('.reply-info .reply-content span');
     const content = replyContentArea.textContent;
@@ -388,5 +388,34 @@ replyModalCancelButton.addEventListener('click', () => {
 })
 
 replySubmitButton.addEventListener('click', submitReply);
+
+// 로그아웃
+const requestLogout = async (event) => {
+    event.preventDefault();
+    const option = {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const res = await fetch(`${COMMON_URL}/users/logout`, {
+        ...option
+    });
+
+    const json = await res.json();
+
+    if (res.status == 200 || res.status == 201) {
+        alert('로그아웃 성공!');
+        setTimeout(() => {
+            location.replace('/login');
+        }, 1000); 
+    } else {
+        alert(json.message);
+    }
+}
+
+logoutButton.addEventListener('click', requestLogout);
 
 

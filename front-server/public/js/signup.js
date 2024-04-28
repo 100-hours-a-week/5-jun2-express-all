@@ -75,8 +75,6 @@ const validateEmailDuplicated = async (email) => {
     const users = await response.json();
     const result = users.some(user => user.email === email);
 
-    //console.log(`result:${result}`);
-
     return result;
 }
 
@@ -266,7 +264,7 @@ const validateUserInfo = async (userInfo) => {
         //console.log(`key:${keys[i]}, value:${userInfo[keys[i]]}`);
         let result = await validate(keys[i], userInfo[keys[i]]);
         if (result == false) {
-            console.log(`key:${keys[i]}, value:${userInfo[keys[i]]}`);
+            //console.log(`key:${keys[i]}, value:${userInfo[keys[i]]}`);
             return false;
         } else {
             continue;

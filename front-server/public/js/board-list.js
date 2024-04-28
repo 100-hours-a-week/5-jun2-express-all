@@ -1,6 +1,3 @@
-// TO-BE : 인피니티 스크롤
-
-const dataURL = '../resource/data/boards-data.json';
 const COMMON_URL = 'http://localhost:8080';
 
 /*
@@ -124,3 +121,34 @@ const displayHTML = async () => {
 }
 
 displayHTML();
+
+// 로그아웃
+const logoutButton = document.getElementById('logout-btn');
+
+const requestLogout = async (event) => {
+    event.preventDefault();
+    const option = {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const res = await fetch(`${COMMON_URL}/users/logout`, {
+        ...option
+    });
+
+    const json = await res.json();
+
+    if (res.status == 200 || res.status == 201) {
+        alert('로그아웃 성공!');
+        setTimeout(() => {
+            location.replace('/login');
+        }, 1000); 
+    } else {
+        alert(json.message);
+    }
+}
+
+logoutButton.addEventListener('click', requestLogout);

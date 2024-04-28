@@ -3,14 +3,12 @@ const contentInput = document.getElementById('content');
 const helperText = document.querySelector('#helper-text span');
 const submitButton = document.getElementById('submit-btn');
 
-const COMMON_URL = 'http://localhost:8080';
-
 // 이미지 업로드 관련
 const imageInputButton = document.getElementById('img-input-btn');
 const imageInput = document.getElementById('img-input');
 const fileText = document.getElementById('file-text');
 
-const boardURL = '/resource/data/board-data.json';
+const COMMON_URL = 'http://localhost:8080';
 
 const getPathVariable = () => {
     const path = window.location.pathname;
