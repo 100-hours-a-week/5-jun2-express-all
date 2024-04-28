@@ -1,3 +1,5 @@
+const COMMON_URL = 'http://localhost:8080';
+
 /*
 * 비동기 코드를 작성하는 방법
 * 1) async/await : await는 비동기 작업이 완료될 때까지 결과를 기다림
@@ -79,7 +81,6 @@ const generateBoardFromData = async () => {
 
 // 서버에서 데이터 불러오는 로직
 const generateBoardFromServer = async () => {
-    const COMMON_URL = 'http://localhost:8080';
     try {
         console.log("=== 데이터 받기 시작 ===");
 
@@ -120,3 +121,34 @@ const displayHTML = async () => {
 }
 
 displayHTML();
+
+// 로그아웃
+const logoutButton = document.getElementById('logout-btn');
+
+const requestLogout = async (event) => {
+    event.preventDefault();
+    const option = {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const res = await fetch(`${COMMON_URL}/users/logout`, {
+        ...option
+    });
+
+    const json = await res.json();
+
+    if (res.status == 200 || res.status == 201) {
+        alert('로그아웃 성공!');
+        setTimeout(() => {
+            location.replace('/login');
+        }, 1000); 
+    } else {
+        alert(json.message);
+    }
+}
+
+logoutButton.addEventListener('click', requestLogout);

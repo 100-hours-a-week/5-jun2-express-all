@@ -393,7 +393,7 @@ replySubmitButton.addEventListener('click', submitReply);
 const requestLogout = async (event) => {
     event.preventDefault();
     const option = {
-        credentails: 'include',
+        credentials: 'include',
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
