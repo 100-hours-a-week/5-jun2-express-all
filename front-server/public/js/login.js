@@ -9,6 +9,8 @@ const MIN_EMAIL_LENGTH = 8;
 const EMAIL_PATTERN = /^[a-zA-Z_\.\-]+@[a-zA-Z0-9\-]+\.[A-za-z0-9\-]+/;
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,20}/;
 
+const COMMON_URL = 'http://localhost:8080';
+
 /*
  * 이메일 유효성 검사
  * 1. 이메일이 너무 짧은 경우
@@ -68,7 +70,6 @@ const validatePassword = () => {
 // 유저 데이터 서버 전송
 const submitUserData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
 
     const userFormData = {
         'email' : emailInput.value,

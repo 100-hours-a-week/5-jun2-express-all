@@ -1,7 +1,3 @@
-// TO-BE : 인피니티 스크롤
-
-const dataURL = '../resource/data/boards-data.json';
-
 /*
 * 비동기 코드를 작성하는 방법
 * 1) async/await : await는 비동기 작업이 완료될 때까지 결과를 기다림

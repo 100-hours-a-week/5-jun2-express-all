@@ -6,6 +6,7 @@
 */
 
 const userDataURL = "../resource/data/user-data.json";
+const COMMON_URL = 'http://localhost:8080';
 
 // Input
 const profileInput = document.getElementById('image-upload');
@@ -73,8 +74,6 @@ const validateEmailDuplicated = async (email) => {
     const response = await fetch(userDataURL);
     const users = await response.json();
     const result = users.some(user => user.email === email);
-
-    //console.log(`result:${result}`);
 
     return result;
 }
@@ -199,7 +198,6 @@ const validateNickname = async () => {
 // 유저 데이터 서버 전송
 const submitUserData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
     
     // 더미 프로필 사진
     const dummyProfileURL = 'http://profiles.com/profile/profile.jpg';
@@ -266,7 +264,7 @@ const validateUserInfo = async (userInfo) => {
         //console.log(`key:${keys[i]}, value:${userInfo[keys[i]]}`);
         let result = await validate(keys[i], userInfo[keys[i]]);
         if (result == false) {
-            console.log(`key:${keys[i]}, value:${userInfo[keys[i]]}`);
+            //console.log(`key:${keys[i]}, value:${userInfo[keys[i]]}`);
             return false;
         } else {
             continue;

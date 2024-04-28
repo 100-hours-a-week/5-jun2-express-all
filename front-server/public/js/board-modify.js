@@ -8,7 +8,7 @@ const imageInputButton = document.getElementById('img-input-btn');
 const imageInput = document.getElementById('img-input');
 const fileText = document.getElementById('file-text');
 
-const boardURL = '/resource/data/board-data.json';
+const COMMON_URL = 'http://localhost:8080';
 
 const getPathVariable = () => {
     const path = window.location.pathname;
@@ -28,7 +28,6 @@ const findBoardData = (boards, pathVariable) => {
 }
 
 const generateBoardModify = async () => {
-    const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
     try {
         const option = {
@@ -54,7 +53,6 @@ const generateBoardModify = async () => {
 
 const submitBoardData = async (event) => {
     event.preventDefault();
-    const COMMON_URL = 'http://localhost:8080';
     const boardId = getPathVariable();
 
     // JSON 전송
