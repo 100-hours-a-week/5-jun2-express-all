@@ -76,13 +76,14 @@ exports.save = async (req) => {
         const userId = ++id;
         const user = {
             'user_id': userId,
-            'profile_url': req.profileUrl,
+            'profile_url': req.profile_url,
             'email': req.email,
             'password': req.password,
             'nickname': req.nickname,
-            'created_at': req.createdAt
+            'created_at': req.created_at
         }
         users.push(user);
+        console.log(users);
         return user;
     } catch (error) {
         throw error;
