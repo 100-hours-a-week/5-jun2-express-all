@@ -200,21 +200,34 @@ const submitUserData = async (event) => {
     event.preventDefault();
     
     // 더미 프로필 사진
-    const dummyProfileURL = 'http://profiles.com/profile/profile.jpg';
+    // const dummyProfileURL = 'http://profiles.com/profile/profile.jpg';
 
-    const userFormData = {
-        'profileUrl' : dummyProfileURL,
-        'email' : emailInput.value,
-        'password' : passwordInput.value,
-        'nickname' : nicknameInput.value,
-    }
+    // const userFormData = {
+    //     'profileUrl' : dummyProfileURL,
+    //     'email' : emailInput.value,
+    //     'password' : passwordInput.value,
+    //     'nickname' : nicknameInput.value,
+    // }
+
+    // const option = {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type' : 'application/json'
+    //     },
+    //     body: JSON.stringify(userFormData)
+    // }
+
+    // FormData 전송
+    const formData = new FormData();
+    formData.append('email', emailInput.value);
+    formData.append('password', passwordInput.value);
+    formData.append('nickname', nicknameInput.value);
+    formData.append('profile', profileInput.files[0]);
 
     const option = {
         method: 'POST',
-        headers: {
-            'Content-Type' : 'application/json'
-        },
-        body: JSON.stringify(userFormData)
+        cache: 'no-cache',
+        body: formData
     }
 
     const res = await fetch(`${COMMON_URL}/users/signup`, {
