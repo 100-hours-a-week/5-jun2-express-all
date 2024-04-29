@@ -9,20 +9,6 @@ const getResponseMessage = (message, data) => {
     return response;
 }
 
-// 무작위 문자열 생성 -> 이후 인증할 때 수정
-function generateRandomString(length) {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charactersLength);
-        result += characters.charAt(randomIndex);
-    }
-
-    return result;
-}
-
 // 인자값 유효성 검사
 const validateRequest = (req) => {
     for (const key in req) {
@@ -104,7 +90,7 @@ exports.loginUser = (req, res, next) => {
                 return res.status(401).json({ message: 'Invalid credentials' });
             }
     
-            // 세션에 사용자 정보를 저장합니다.
+            // 세션에 사용자 정보 저장
             req.session.user = {
                 id: findUser.user_id,
                 email: findUser.email,
