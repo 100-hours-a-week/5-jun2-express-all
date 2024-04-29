@@ -36,7 +36,7 @@ app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use("/users", userRouter);
+app.use("/users", userRouter, express.static(path.join(__dirname, 'profiles')));
 app.use("/boards", boardRouter);
 app.use("/images", imageRouter, express.static(path.join(__dirname, 'uploads')));
 

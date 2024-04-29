@@ -43,9 +43,14 @@ const getCreatedDate = () => {
 // 회원가입
 exports.signupUser = async (req, res, next) => {
     try {
-        const { profileUrl, email, password, nickname } = req.body;
-        const createdAt = getCreatedDate();
-        const user = { profileUrl, email, password, nickname, createdAt };
+        const email = req.body.email;
+        const password = req.body.password;
+        const nickname = req.body.nickname;
+        const created_at = getCreatedDate();
+        const profile_url = req.file.path;
+
+        console.log(`${email} : ${password} : ${created_at} : ${profile_url}`);
+        const user = { email, password, nickname, created_at, profile_url };
 
         // 요청 값이 비어있는지 확인
         validateRequest(user);
