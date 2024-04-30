@@ -55,6 +55,22 @@ header {
     border-radius: 100%;
 }
 
+#login-btn {
+    position: absolute;
+    text-decoration: none;
+    color: grey;
+    right: 35%;
+}
+
+#login-btn:hover {
+    color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+
 /** drop-down **/
 .dropdown-menu {
     display: none;
