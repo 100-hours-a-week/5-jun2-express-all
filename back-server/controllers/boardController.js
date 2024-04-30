@@ -124,7 +124,6 @@ exports.updateBoard = async (req, res, next) => {
         const board_id = req.params.boardId;
         validateBoardWriter(req.session.user, board_id);
 
-
         const { title, content } = req.body;
         const image_url = req.file.path;
         const newBoardData = { board_id, title, content, image_url };
@@ -150,7 +149,12 @@ exports.updateBoard = async (req, res, next) => {
 // 게시글 삭제
 exports.deleteBoard = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+        
         const board_id = req.params.boardId;
+        validateBoardWriter(req.session.user, board_id);
 
         boardRepository.deleteById(board_id);
 
