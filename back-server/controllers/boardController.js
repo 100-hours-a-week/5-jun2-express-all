@@ -107,9 +107,23 @@ exports.findByBoardId = async (req, res, next) => {
 }
 
 // 게시글 수정
+const validateBoardWriter = (user, board_id) => {
+    const findBoard = boardRepository.findById(board_id);
+    console.log(`userid: ${user.id}, boardWriterId: ${findBoard.writer_id}`);
+    if (user.id != findBoard.writer_id) {
+        throw new Error('권한이 없는 사용자입니다.');
+    }
+}
+
 exports.updateBoard = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+        
         const board_id = req.params.boardId;
+        validateBoardWriter(req.session.user, board_id);
+
         const { title, content } = req.body;
         const image_url = req.file.path;
         const newBoardData = { board_id, title, content, image_url };
@@ -135,7 +149,12 @@ exports.updateBoard = async (req, res, next) => {
 // 게시글 삭제
 exports.deleteBoard = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+        
         const board_id = req.params.boardId;
+        validateBoardWriter(req.session.user, board_id);
 
         boardRepository.deleteById(board_id);
 
@@ -185,10 +204,25 @@ exports.registerComment = async (req, res, next) => {
 }
 
 // 댓글 수정
+const validateCommentWriter = (user, board_id, comment_id) => {
+    const findComment = boardRepository.findCommentById(board_id, comment_id);
+    
+    if (user.id != findComment.comment_writer_id) {
+        throw new Error('권한이 없는 사용자입니다.');
+    }
+}
+
 exports.updateComment = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+
         const board_id = req.params.boardId;
         const comment_id = req.params.commentId;
+
+        validateCommentWriter(req.session.user, board_id, comment_id);
+
         const comment = req.body.comment;
         const updated_at = getNowDate();
 
@@ -212,8 +246,14 @@ exports.updateComment = async (req, res, next) => {
 // 댓글 삭제
 exports.deleteComment = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+
         const board_id = req.params.boardId;
         const comment_id = req.params.commentId;
+
+        validateCommentWriter(req.session.user, board_id, comment_id);
 
         boardRepository.deleteCommentById(board_id, comment_id);
 
