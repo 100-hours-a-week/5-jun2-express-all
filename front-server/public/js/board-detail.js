@@ -57,6 +57,7 @@ const formatDate = (inputDate) => {
 // 게시글 정보
 const generateInfoBox = (element) => {
     let createdAt = formatDate(element.created_at);
+    let writerProfileURL = `${COMMON_URL}/${element.writer_profile_url}`;
 
     return `
         <div id="post-title">
@@ -65,7 +66,7 @@ const generateInfoBox = (element) => {
         <div id="post-info-view">
             <div id="post-info">
                 <div class="writer-info">
-                    <img class="profile-img" src=${element.writer_profile_url}>
+                    <img class="profile-img" src=${writerProfileURL}>
                     <span id="writer">${element.writer_name}</span>
                 </div>
                 <span class="time">${createdAt}</span>
@@ -109,8 +110,9 @@ const generateContentView = (element) => {
 
 // 댓글 
 const generateReplyForm = (data) => {
+    console.log(data);
     let commentId = data.comment_id;
-    let writerProfileURL = data.comment_writer_profile;
+    let writerProfileURL = `${COMMON_URL}/${data.comment_writer_profile}`;
     let writerName = data.comment_writer_name;
     let comment = data.comment_content;
     let createdAt = formatDate(data.created_at);
