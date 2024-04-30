@@ -107,9 +107,24 @@ exports.findByBoardId = async (req, res, next) => {
 }
 
 // 게시글 수정
+const validateBoardWriter = (user, board_id) => {
+    const findBoard = boardRepository.findById(board_id);
+    console.log(`userid: ${user.id}, boardWriterId: ${findBoard.writer_id}`);
+    if (user.id != findBoard.writer_id) {
+        throw new Error('권한이 없는 사용자입니다.');
+    }
+}
+
 exports.updateBoard = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+        
         const board_id = req.params.boardId;
+        validateBoardWriter(req.session.user, board_id);
+
+
         const { title, content } = req.body;
         const image_url = req.file.path;
         const newBoardData = { board_id, title, content, image_url };
