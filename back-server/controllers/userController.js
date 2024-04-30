@@ -101,10 +101,6 @@ exports.loginUser = (req, res, next) => {
                 email: findUser.email,
                 authorized: true
             };
-            res.cookie('session_id', req.sessionID, {
-                maxAge: 10000,
-                httpOnly: false
-            });
             console.log(req.session);
 
             return res.status(200).json({ message: 'login_success' });
