@@ -10,6 +10,7 @@ const MemoryStore = require('memorystore')(session);
 const userRouter = require('./routes/userRouter');
 const boardRouter = require('./routes/boardRouter');
 const imageRouter = require('./routes/imageRouter');
+const profileRouter = require('./routes/profileRouter');
 
 const corsOprions = {
     origin: 'http://localhost:3000',
@@ -39,6 +40,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use("/users", userRouter, express.static(path.join(__dirname, 'profiles')));
 app.use("/boards", boardRouter);
 app.use("/images", imageRouter, express.static(path.join(__dirname, 'uploads')));
+app.use("/profiles", profileRouter, express.static(path.join(__dirname, 'profiles')));
 
 // check server connection
 app.get('/', (req, res) => {

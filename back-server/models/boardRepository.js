@@ -2,7 +2,7 @@ const boards =  [
     {
         "board_id": 1,
         "title": "아 제목 뭐로 할지 정말 고민이다ㅋㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋㅎㅋ",
-        "writer_profile_url": "../resource/image/musk.jpeg",
+        "writer_profile_url": "profiles/musk.jpeg",
         "writer_name": "일론 머스크",
         "created_at": "2024-04-15T12:24:34",
         "image_url" : "uploads/spacex.jpeg",
@@ -13,21 +13,21 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
-                "comment_writer_profile" : "../resource/image/steve.jpeg", 
+                "comment_writer_profile" : "profiles/steve.jpeg", 
                 "comment_writer_name" : "스티브 잡스",
                 "comment_content" : "우주선에 사과 로고 하나 넣어주면 안됨?",
                 "created_at" : "2024-04-16T12:24:11"
             },
             {
                 "comment_id" : 2,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "무지",
                 "comment_content" : "진짜 아무말이네",
                 "created_at" : "2024-04-16T14:49:59"
             },
             {
                 "comment_id" : 3,
-                "comment_writer_profile" : "../resource/image/jaeyong.jpeg",
+                "comment_writer_profile" : "profiles/jaeyong.jpeg",
                 "comment_writer_name" : "째용이형",
                 "comment_content" : "아니 그러면 우리 회사 로고도 넣어주셈 밥 한끼 쏠게",
                 "created_at" : "2024-04-20T11:42:33"
@@ -37,7 +37,7 @@ const boards =  [
     {
         "board_id": 2,
         "title": "얘들아 나 사실 갤럭시 씀 ㅋㅋ",
-        "writer_profile_url": "../resource/image/steve.jpeg",
+        "writer_profile_url": "profiles/steve.jpeg",
         "writer_name": "스티브 잡스",
         "created_at": "2024-04-10T09:08:12",
         "image_url" : "uploads/steveG.jpeg",
@@ -48,21 +48,21 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
-                "comment_writer_profile" : "../resource/image/jaeyong.jpeg",
+                "comment_writer_profile" : "profiles/jaeyong.jpeg",
                 "comment_writer_name" : "째용이형",
                 "comment_content" : "ㅋ",
                 "created_at" : "2024-04-11T00:13:21"
             },
             {
                 "comment_id" : 2,
-                "comment_writer_profile" : "../resource/image/musk.jpeg",
+                "comment_writer_profile" : "profiles/musk.jpeg",
                 "comment_writer_name" : "일론 머스크",
                 "comment_content" : "와드요",
                 "created_at" : "2024-04-10T10:12:03"
             },
             {
                 "comment_id" : 3,
-                "comment_writer_profile" : "../resource/image/mawin.jpeg",
+                "comment_writer_profile" : "profiles/mawin.jpeg",
                 "comment_writer_name" : "마윈",
                 "comment_content" : "야 이거 월드컵보다 재밌겠는데",
                 "created_at" : "2024-04-10T21:09:16"
@@ -72,7 +72,7 @@ const boards =  [
     {
         "board_id": 3,
         "title": "깻잎으로 딱밤 때리기",
-        "writer_profile_url": "../resource/image/profile2.jpeg",
+        "writer_profile_url": "profiles/profile2.jpeg",
         "writer_name": "무지",
         "created_at": "2024-04-15T12:24:34",
         "image_url" : "uploads/images/image.jpg",
@@ -83,21 +83,21 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 1",
                 "comment_content" : "댓글 내용 1",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 2,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 2",
                 "comment_content" : "댓글 내용 2",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 3,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 3",
                 "comment_content" : "댓글 내용 3",
                 "created_at" : "2021-01-02T00:00:00"
@@ -107,7 +107,7 @@ const boards =  [
     {
         "board_id": 4,
         "title": "혼자 가위바위보 해서 이기는 방법 (진지하게 연구함)",
-        "writer_profile_url": "../resource/image/musk.jpeg",
+        "writer_profile_url": "profiles/musk.jpeg",
         "writer_name": "마윈",
         "created_at": "2024-01-01T00:13:57",
         "image_url" : "uploads/mawin.jpeg",
@@ -118,21 +118,21 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 1",
                 "comment_content" : "댓글 내용 1",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 2,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 2",
                 "comment_content" : "댓글 내용 2",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 3,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 3",
                 "comment_content" : "댓글 내용 3",
                 "created_at" : "2021-01-02T00:00:00"
@@ -142,7 +142,7 @@ const boards =  [
     {
         "board_id": 5,
         "title": "이번에 맥 살건데 추천좀",
-        "writer_profile_url": "../resource/image/jaeyong.jpeg",
+        "writer_profile_url": "profiles/jaeyong.jpeg",
         "writer_name": "째용이형",
         "created_at": "2024-01-01T20:22:56",
         "image_url" : "uploads/youtube.png",
@@ -153,21 +153,21 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 1",
                 "comment_content" : "댓글 내용 1",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 2,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 2",
                 "comment_content" : "댓글 내용 2",
                 "created_at" : "2021-01-02T00:00:00"
             },
             {
                 "comment_id" : 3,
-                "comment_writer_profile" : "../resource/image/profile2.jpeg",
+                "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "더미 작성자 3",
                 "comment_content" : "댓글 내용 3",
                 "created_at" : "2021-01-02T00:00:00"
