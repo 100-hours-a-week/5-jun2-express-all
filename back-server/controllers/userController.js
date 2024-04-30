@@ -72,12 +72,6 @@ exports.signupUser = async (req, res, next) => {
     }
 }
 
-const authData = {
-    email: 'wnstj@naver.com',
-    password: '111111',
-    nickname: 'jun'
-}
-
 // 로그인
 exports.loginUser = (req, res, next) => {
     try {
@@ -118,8 +112,6 @@ exports.loginUser = (req, res, next) => {
 
 // 로그아웃
 exports.logoutUser = (req, res, next) => {
-    console.log("=== status ===");
-    console.log(req.session);
     if (req.session.user) {
         req.session.destroy();
         res.clearCookie('session_id');
@@ -128,6 +120,19 @@ exports.logoutUser = (req, res, next) => {
     } else {
         console.log("no logined user");
     }
+}
+
+// 회원 정보 조회
+exports.getUser = async (req, res, next) => {
+    // 로그인하지 않은 경우
+    if (!req.session.user) {
+        return res.status(204).json({ message: 'success_without_login'});
+    }
+
+    const currentUser = req.session.user;
+    const user = userRepository.findById(currentUser.id);
+
+    return res.status(200).json({ message: 'success_with_login', user: user });
 }
 
 // 회원 정보 수정

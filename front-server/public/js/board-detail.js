@@ -15,7 +15,11 @@ const replySubmitButton = document.getElementById('reply-submit-btn');
 const replyUpdateButton = document.getElementById('reply-update-btn');
 const replyDeleteButton = document.getElementById('reply-delete-btn');
 
+const userProfile = document.getElementById('user-profile-img');
+const currentUserProfile = document.getElementById('current-profile');
+const loginButton = document.getElementById('login-btn')
 const logoutButton = document.getElementById('logout-btn');
+
 
 const COMMON_URL = 'http://localhost:8080';
 
@@ -53,6 +57,39 @@ const formatDate = (inputDate) => {
 
     return `${year}:${month}:${day} ${hours}:${minutes}:${seconds}`;
 }
+
+// 페이지 로드시 로그인한 유저 프로필 가져오기
+const getCurrentUserInfo = async (event) => {
+    event.preventDefault();
+    const option = {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+
+    const res = await fetch(`${COMMON_URL}/users/me`, {
+        ...option
+    });
+
+    const json = await res.json();
+    console.log(json);
+
+    if (res.status == 200) {
+        const profileUrl = json.user.profile_url;
+        currentUserProfile.src = `${COMMON_URL}/${profileUrl}`;
+        userProfile.classList.remove('hidden');
+        loginButton.classList.add('hidden');
+    } else if (res.status == 204) {
+        loginButton.classList.remove('hidden');
+        userProfile.classList.add('hidden');
+    } else {
+        alert(json.message);
+    }
+} 
+
+window.addEventListener('DOMContentLoaded', getCurrentUserInfo);
 
 // 게시글 정보
 const generateInfoBox = (element) => {
@@ -416,7 +453,7 @@ const requestLogout = async (event) => {
     if (res.status == 200 || res.status == 201) {
         alert('로그아웃 성공!');
         setTimeout(() => {
-            location.replace('/login');
+            location.replace('/boards');
         }, 1000); 
     } else {
         alert(json.message);

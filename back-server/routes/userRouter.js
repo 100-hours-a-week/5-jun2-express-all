@@ -33,13 +33,16 @@ router.post("/login", userController.loginUser);
 // 로그아웃
 router.post("/logout", requireAuth, userController.logoutUser);
 
+// 회원 정보 조회
+router.get("/me", userController.getUser);
+
 // 회원 정보 수정
-router.post("/users/me", requireAuth, userController.updateUser);
+router.post("/me", requireAuth, userController.updateUser);
 
 // 비밀번호 수정
-router.post("/users/password", requireAuth, userController.updatePassword);
+router.post("/password", requireAuth, userController.updatePassword);
 
 // 회원 탈퇴
-router.delete("/users/me", requireAuth, userController.deleteUser);
+router.delete("/me", requireAuth, userController.deleteUser);
 
 module.exports = router;
