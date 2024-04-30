@@ -5,6 +5,7 @@ const users = [
         "email" : "juntwo@naver.com",
         "password" : "Qwer123!",
         "nickname" : "juntwo",
+        "profile_url" : "profiles/profile2.jpeg",
         "created_at" : "2024-04-18T13:27:33"
     },
     {
@@ -12,6 +13,7 @@ const users = [
         "email" : "void@google.com",
         "password" : "Qwer123!",
         "nickname" : "void",
+        "profile_url" : "profiles/profile2.jpeg",
         "created_at" : "2024-04-15T11:34:10"
     },
     {
@@ -19,6 +21,7 @@ const users = [
         "email" : "jeff@google.com",
         "password" : "Qwer123!",
         "nickname" : "jeff",
+        "profile_url" : "profiles/profile2.jpeg",
         "created_at" : "2024-03-06T20:09:12"
     },
     {
@@ -26,6 +29,7 @@ const users = [
         "email" : "chen@naver.com",
         "password" : "Qwer123!",
         "nickname" : "chen",
+        "profile_url" : "profiles/profile2.jpeg",
         "created_at" : "2024-02-21T06:13:04"
     },
     {
@@ -40,6 +44,7 @@ const users = [
         "email" : "judy@naver.com",
         "password" : "Qwer123!",
         "nickname" : "judy",
+        "profile_url" : "profiles/profile2.jpeg",
         "created_at" : "2024-01-14T22:17:35"
     }
 ];

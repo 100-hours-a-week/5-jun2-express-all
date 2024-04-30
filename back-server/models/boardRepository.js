@@ -193,8 +193,8 @@ exports.save = async (req) => {
         const board = {
             'board_id': boardId,
             'title': req.title,
-            'writer_profile_url': '../resource/image/musk.jpeg',
-            'writer_name': '일론 머스크',
+            'writer_profile_url': req.writer.profile_url,
+            'writer_name': req.writer.nickname,
             'image_url': req.image_url,
             'content': req.content,
             'likes_count': 0,

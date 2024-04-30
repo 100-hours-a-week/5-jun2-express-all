@@ -12,6 +12,5 @@ exports.requireAuth = (req, res, next) => {
         return res.status(401).json({ message: '로그인이 필요한 서비스입니다.' });
     }
 
-    return res.status(200).json({ message: 'sucess' });
-    
+    next();
 }
