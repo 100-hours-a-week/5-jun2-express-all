@@ -29,6 +29,9 @@ const generateBoard = (element) => {
     let commentsCount = formatNumber(element.comments_count);
     let viewsCount = formatNumber(element.views_count);
     let createdAt = formatDate(element.created_at);
+    let profileName = element.writer_profile_url.split('/')[1];
+    let profileURL = `${COMMON_URL}/profiles/${profileName}`;
+    console.log(`name: ${profileName} , url: ${profileURL}`);
 
     return `
     <a href="/boards/${element.board_id}" class="link">
@@ -50,7 +53,7 @@ const generateBoard = (element) => {
             </div>
             <hr class="line">
             <div class="user-info">
-                <img class="profile-img" src=${element.writer_profile_url}>
+                <img class="profile-img" src=${profileURL}>
                 <span>${element.writer_name}</span>
             </div>
         </div>
