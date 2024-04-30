@@ -271,21 +271,16 @@ exports.deleteById = (boardId) => {
  */
 
 // 댓글 등록
-exports.saveComment = (boardId, comment, createdAt) => {
+exports.saveComment = (writer, boardId, comment, createdAt) => {
     const findBoard = this.findById(boardId);
     const commentId = findBoard['comments'].length + 1;
-
-    // 더미 유저
-    const userId = 1;
-    const nickname = "째용이형";
-    const profileUrl = "../resource/image/jaeyong.jpeg"
 
     const commentData = {
         'board_id': boardId,
         'comment_id': commentId,
         'comment_content': comment,
-        'comment_writer_name': '일론 머스크',
-        'comment_writer_profile': '../resource/image/musk.jpeg',
+        'comment_writer_name': writer.nickname,
+        'comment_writer_profile': writer.profile_url,
         'created_at': createdAt
     }
 

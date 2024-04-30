@@ -157,11 +157,17 @@ exports.deleteBoard = async (req, res, next) => {
 // 댓글 등록
 exports.registerComment = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+
         const board_id = req.params.boardId;
         const comment = req.body.comment;
         const created_at = getNowDate();
+        const writer_id = req.session.user.id;
+        const writer = userRepository.findById(writer_id);
 
-        const commentData = boardRepository.saveComment(board_id, comment, created_at);
+        const commentData = boardRepository.saveComment(writer, board_id, comment, created_at);
         const response = getResponseMessage('register_success', commentData);
 
         return res.status(201).json(response);
