@@ -3,6 +3,9 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
+const userController = require('../controllers/userController');
+const { requireAuth } = require('../middlewares/requireAuth');
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'profiles/');
@@ -21,8 +24,6 @@ const upload = multer({
     storage: storage
 });
 
-const userController = require('../controllers/userController');
-
 // 회원가입
 router.post("/signup", upload.single('profile'), userController.signupUser);
 
@@ -30,15 +31,15 @@ router.post("/signup", upload.single('profile'), userController.signupUser);
 router.post("/login", userController.loginUser);
 
 // 로그아웃
-router.post("/logout", userController.logoutUser);
+router.post("/logout", requireAuth, userController.logoutUser);
 
 // 회원 정보 수정
-router.post("/users/me", userController.updateUser);
+router.post("/users/me", requireAuth, userController.updateUser);
 
 // 비밀번호 수정
-router.post("/users/password", userController.updatePassword);
+router.post("/users/password", requireAuth, userController.updatePassword);
 
 // 회원 탈퇴
-router.delete("/users/me", userController.deleteUser);
+router.delete("/users/me", requireAuth, userController.deleteUser);
 
 module.exports = router;

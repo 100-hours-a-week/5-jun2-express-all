@@ -88,6 +88,7 @@ const generateBoardFromServer = async () => {
         console.log("=== 데이터 받기 시작 ===");
 
         const option = {
+            credentials: 'include',
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json'

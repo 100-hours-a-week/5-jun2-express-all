@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const { requireAuth } = require('../middlewares/requireAuth');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -32,7 +33,7 @@ const upload  = multer({
 const boardController = require('../controllers/boardController');
 
 // 게시글 등록
-router.post("/", upload.single('image'), boardController.registerBoardWithImage);
+router.post("/", requireAuth, upload.single('image'), boardController.registerBoardWithImage);
 
 // 게시글 목록 조회
 router.get("/", boardController.findAllBoards);
@@ -41,18 +42,18 @@ router.get("/", boardController.findAllBoards);
 router.get("/:boardId", boardController.findByBoardId);
 
 // 게시글 수정
-router.post("/:boardId", upload.single('image'), boardController.updateBoard);
+router.post("/:boardId", requireAuth, upload.single('image'), boardController.updateBoard);
 
 // 게시글 삭제
-router.delete("/:boardId", boardController.deleteBoard);
+router.delete("/:boardId", requireAuth, boardController.deleteBoard);
 
 // 댓글 등록
-router.post("/:boardId/comments", boardController.registerComment);
+router.post("/:boardId/comments", requireAuth, boardController.registerComment);
 
 // 댓글 수정
-router.post("/:boardId/comments/:commentId", boardController.updateComment);
+router.post("/:boardId/comments/:commentId", requireAuth, boardController.updateComment);
 
 // 댓글 삭제
-router.delete("/:boardId/comments/:commentId", boardController.deleteComment);
+router.delete("/:boardId/comments/:commentId", requireAuth, boardController.deleteComment);
 
 module.exports = router;

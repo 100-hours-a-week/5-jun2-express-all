@@ -107,7 +107,7 @@ const boards =  [
     {
         "board_id": 4,
         "title": "혼자 가위바위보 해서 이기는 방법 (진지하게 연구함)",
-        "writer_profile_url": "profiles/musk.jpeg",
+        "writer_profile_url": "profiles/mawin.jpeg",
         "writer_name": "마윈",
         "created_at": "2024-01-01T00:13:57",
         "image_url" : "uploads/mawin.jpeg",
