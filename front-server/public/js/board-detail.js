@@ -152,6 +152,7 @@ const generateBoardContents = async () => {
     const boardId = getPathVariable('board');
     try {
         const option = {
+            credentials: 'include',
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json'
@@ -202,6 +203,7 @@ const deleteBoard = async (event) => {
     const boardId = getPathVariable('board');
 
     const option = {
+        credentials: 'include',
         method: 'DELETE',
         headers: {
             'Content-Type' : 'application/json'
@@ -237,6 +239,7 @@ const submitReply = async (event) => {
     }
 
     const option = {
+        credentials: 'include',
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -277,6 +280,7 @@ const submitUpdateReply = async (element) => {
         }
 
         const option = {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
@@ -328,6 +332,7 @@ const deleteReply = async (event) => {
     replyModal.classList.add('hidden');
 
     const option = {
+        credentials: 'include',
         method: 'DELETE',
         headers: {
             'Content-Type' : 'application/json'

@@ -31,6 +31,7 @@ const generateBoardModify = async () => {
     const boardId = getPathVariable();
     try {
         const option = {
+            credentials: 'include',
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json'
@@ -77,6 +78,7 @@ const submitBoardData = async (event) => {
     formData.append('image', imageInput.files[0]);
 
     const option = {
+        credentials: 'include',
         method: 'POST',
         cache: 'no-cache',
         body: formData
