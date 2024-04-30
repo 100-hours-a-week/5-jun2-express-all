@@ -246,8 +246,14 @@ exports.updateComment = async (req, res, next) => {
 // 댓글 삭제
 exports.deleteComment = async (req, res, next) => {
     try {
+        if (!req.session.user) {
+            throw new Error('unauthorized user');
+        }
+
         const board_id = req.params.boardId;
         const comment_id = req.params.commentId;
+
+        validateCommentWriter(req.session.user, board_id, comment_id);
 
         boardRepository.deleteCommentById(board_id, comment_id);
 
