@@ -14,13 +14,15 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
+                "comment_writer_id" : 2,
                 "comment_writer_profile" : "profiles/steve.jpeg", 
                 "comment_writer_name" : "스티브 잡스",
                 "comment_content" : "우주선에 사과 로고 하나 넣어주면 안됨?",
                 "created_at" : "2024-04-16T12:24:11"
             },
             {
-                "comment_id" : 2,
+                "comment_id" : 3,
+                "comment_writer_id" : 3,
                 "comment_writer_profile" : "profiles/profile2.jpeg",
                 "comment_writer_name" : "무지",
                 "comment_content" : "진짜 아무말이네",
@@ -28,6 +30,7 @@ const boards =  [
             },
             {
                 "comment_id" : 3,
+                "comment_writer_id" : 5,
                 "comment_writer_profile" : "profiles/jaeyong.jpeg",
                 "comment_writer_name" : "째용이형",
                 "comment_content" : "아니 그러면 우리 회사 로고도 넣어주셈 밥 한끼 쏠게",
@@ -50,6 +53,7 @@ const boards =  [
         "comments" : [
             {
                 "comment_id" : 1,
+                "comment_writer_id" : 5,
                 "comment_writer_profile" : "profiles/jaeyong.jpeg",
                 "comment_writer_name" : "째용이형",
                 "comment_content" : "ㅋ",
@@ -57,6 +61,7 @@ const boards =  [
             },
             {
                 "comment_id" : 2,
+                "comment_writer_id" : 1,
                 "comment_writer_profile" : "profiles/musk.jpeg",
                 "comment_writer_name" : "일론 머스크",
                 "comment_content" : "와드요",
@@ -64,6 +69,7 @@ const boards =  [
             },
             {
                 "comment_id" : 3,
+                "comment_writer_id" : 4,
                 "comment_writer_profile" : "profiles/mawin.jpeg",
                 "comment_writer_name" : "마윈",
                 "comment_content" : "야 이거 월드컵보다 재밌겠는데",
@@ -283,6 +289,7 @@ exports.saveComment = (writer, boardId, comment, createdAt) => {
 
     const commentData = {
         'board_id': boardId,
+        'comment_writer_id': writer.user_id,
         'comment_id': commentId,
         'comment_content': comment,
         'comment_writer_name': writer.nickname,
@@ -344,4 +351,17 @@ exports.deleteCommentById = (boardId, commentId) => {
     }
 
     comments.splice(index, 1);
+}
+
+// 댓글 조회
+exports.findCommentById = (boardId, commentId) => {
+    const findBoard = this.findById(boardId);
+    if (findBoard == null || findBoard == undefined) {
+        throw new Error('board_not_exist');
+    }
+
+    const comments = findBoard['comments'];
+    const index = comments.findIndex(comment => comment.comment_id == commentId);
+
+    return comments[index];
 }
