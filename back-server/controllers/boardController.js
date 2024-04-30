@@ -101,6 +101,9 @@ exports.registerBoardWithImage = (req, res, next) => {
 // 게시글 목록 조회
 exports.findAllBoards = async (req, res, next) => {
     try {
+        console.log("=== board list 세션 ===");
+        console.log(req.session);
+        console.log("=== 세션 끝 ===\n\n");
         const boards = boardRepository.findAll();
         const response = getResponseMessage('success', boards);
 
@@ -112,7 +115,10 @@ exports.findAllBoards = async (req, res, next) => {
 
 // 게시글 상세 조회
 exports.findByBoardId = async (req, res, next) => {
-    try {   
+    try {
+        console.log("=== board detail 세션 ===");
+        console.log(req.session);
+        console.log("=== 세션 끝 ===\n\n");   
         const boardId = req.params.boardId;
 
         const findBoard = boardRepository.findById(boardId);
