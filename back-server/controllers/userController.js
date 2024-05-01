@@ -126,13 +126,13 @@ exports.logoutUser = (req, res, next) => {
 exports.getUser = async (req, res, next) => {
     // 로그인하지 않은 경우
     if (!req.session.user) {
-        return res.status(204).json({ message: 'success_without_login'});
+        return res.status(204).json({ message: 'success_without_login', user: null});
     }
 
     const currentUser = req.session.user;
-    const user = userRepository.findById(currentUser.id);
+    const findUser = userRepository.findById(currentUser.id);
 
-    return res.status(200).json({ message: 'success_with_login', user: user });
+    return res.status(200).json({ message: 'success_with_login', user: findUser });
 }
 
 // 회원 정보 수정

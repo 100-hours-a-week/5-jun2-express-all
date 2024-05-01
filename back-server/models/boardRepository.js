@@ -298,6 +298,7 @@ exports.saveComment = (writer, boardId, comment, createdAt) => {
     }
 
     findBoard['comments'].push(commentData);
+    findBoard['comments_count']++;
 
     return commentData;
 }
@@ -351,6 +352,7 @@ exports.deleteCommentById = (boardId, commentId) => {
     }
 
     comments.splice(index, 1);
+    findBoard['comments_count']--;
 }
 
 // 댓글 조회
