@@ -58,9 +58,8 @@ const formatDate = (inputDate) => {
     return `${year}:${month}:${day} ${hours}:${minutes}:${seconds}`;
 }
 
-// 페이지 로드시 로그인한 유저 프로필 가져오기
-const getCurrentUserInfo = async (event) => {
-    event.preventDefault();
+// 로그인한 유저 정보 가져오기
+const getCurrentUserInfo = async () => {
     const option = {
         credentials: 'include',
         method: 'GET',
@@ -73,11 +72,19 @@ const getCurrentUserInfo = async (event) => {
         ...option
     });
 
-    const json = await res.json();
-    console.log(json);
+    return res;
+}
+
+// 페이지 로드시 로그인한 유저 프로필 가져오기
+const getCurrentUserProfile = async () => {
+
+    const res = await getCurrentUserInfo();
 
     if (res.status == 200) {
-        const profileUrl = json.user.profile_url;
+        const json = await res.json();
+        const user = json.user;
+
+        const profileUrl = user.profile_url;
         currentUserProfile.src = `${COMMON_URL}/${profileUrl}`;
         userProfile.classList.remove('hidden');
         loginButton.classList.add('hidden');
@@ -85,11 +92,12 @@ const getCurrentUserInfo = async (event) => {
         loginButton.classList.remove('hidden');
         userProfile.classList.add('hidden');
     } else {
-        alert(json.message);
+        //alert(res.message);
     }
 } 
 
-window.addEventListener('DOMContentLoaded', getCurrentUserInfo);
+//window.addEventListener('DOMContentLoaded', getCurrentUserProfile);
+getCurrentUserProfile();
 
 // 게시글 정보
 const generateInfoBox = (element) => {
@@ -146,15 +154,33 @@ const generateContentView = (element) => {
 }
 
 // 댓글 
-const generateReplyForm = (data) => {
-    console.log(data);
+const generateReplyForm = (data, currentUser) => {
     let commentId = data.comment_id;
     let writerProfileURL = `${COMMON_URL}/${data.comment_writer_profile}`;
     let writerName = data.comment_writer_name;
     let comment = data.comment_content;
     let createdAt = formatDate(data.created_at);
 
-    return `
+    // 로그인하지 않았거나 댓글 작성자가 아닌 경우 수정/삭제 버튼 안보임
+    if (currentUser == undefined || data.comment_writer_id != currentUser.user_id) {
+        return `
+        <div id="${commentId}" class="reply-form">
+            <div class="reply-info">
+                <div class="reply-header">
+                    <div class="writer-info">
+                        <img class="profile-img" src=${writerProfileURL}>
+                        <span class="reply-writer">${writerName}</span>
+                    </div>
+                    <span class="time">${createdAt}</span>
+                </div>
+                <div class="reply-content">
+                    <span>${comment}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    } else if (data.comment_writer_id == currentUser.user_id) {
+        return `
         <div id="${commentId}" class="reply-form">
             <div class="reply-info">
                 <div class="reply-header">
@@ -173,13 +199,14 @@ const generateReplyForm = (data) => {
                 <button type="button" onclick='showReplyDeleteModal(this)'><a>삭제</a></button>
             </div>
         </div>
-    `;
+        `;
+    }
 }
 
-const generateReplies = (comments) => {
+const generateReplies = (comments, user) => {
     let html = '';
     comments.forEach(comment => {
-        html += generateReplyForm(comment);
+        html += generateReplyForm(comment, user);
     });
     return html;
 }
@@ -202,9 +229,18 @@ const generateBoardContents = async () => {
         const json = await response.json();
         const board = json.data;
 
+        const userResponse = await getCurrentUserInfo();
+        let userJson;
+        let currentUser;
+        if (userResponse.status == 200) {
+            userJson = await userResponse.json();
+            currentUser = userJson.user;
+        } 
+        console.log(currentUser);
+
         let infoBox = generateInfoBox(board);
         let contentView = generateContentView(board);
-        let replies = generateReplies(board.comments);
+        let replies = generateReplies(board.comments, currentUser);
 
         document.getElementById('post-info-box').innerHTML = infoBox;
         document.getElementById('content-view').innerHTML = contentView;
@@ -257,6 +293,8 @@ const deleteBoard = async (event) => {
             location.replace('/boards');
         }, 500);
     } else {
+        boardModal.classList.remove('visible');
+        boardModal.classList.add('hidden');
         alert(json.message);
     }
 }
@@ -337,6 +375,7 @@ const submitUpdateReply = async (element) => {
             location.reload();
         } else {
             alert(json.message);
+            location.reload();
         }
     });
 }
@@ -385,7 +424,10 @@ const deleteReply = async (event) => {
     if (res.status == 200 || res.status == 201) {
         location.reload();
     } else {
+        boardModal.classList.remove('visible');
+        boardModal.classList.add('hidden');
         alert(json.message);
+        location.reload();
     }
 }
 
